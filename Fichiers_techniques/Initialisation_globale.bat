@@ -33,7 +33,7 @@ Winget install Google.Chrome -h --accept-package-agreements --accept-source-agre
 Winget install Brave.Brave -h --accept-package-agreements --accept-source-agreements
 Winget install TorProject.TorBrowser -h --accept-package-agreements --accept-source-agreements
 Winget install Discord.Discord -h --accept-package-agreements --accept-source-agreements
-Winget install WhatsApp.WhatsApp -h --accept-package-agreements --accept-source-agreements
+Winget install 9NKSQGP7F2NH -h --accept-package-agreements --accept-source-agreements
 Winget install OpenWhisperSystems.Signal -h --accept-package-agreements --accept-source-agreements
 Winget install Telegram.TelegramDesktop -h --accept-package-agreements --accept-source-agreements
 Winget install Microsoft.Skype -h --accept-package-agreements --accept-source-agreements
