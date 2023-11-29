@@ -1,13 +1,156 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World Example</title>
+<meta charset="utf-8">
+<title>Accueil</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="font-awesome.min.css" rel="stylesheet">
+<link href="Site.css" rel="stylesheet">
+<link href="Index.css" rel="stylesheet">
+<script src="popper.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="bootstrap.dropdown.min.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(event)
+{
+   var DropdownMenu2_dropdownToggle = document.querySelectorAll('#DropdownMenu2 .dropdown-toggle');
+   DropdownMenu2_dropdownToggle.forEach(item => 
+   {
+      var dropdown = new bootstrap.Dropdown(item, {popperConfig:{placement:item.getAttribute('data-bs-placement')}});
+   });
+   var DropdownMenu2_dropdown = document.querySelectorAll('#DropdownMenu2 .dropdown');
+   DropdownMenu2_dropdown.forEach(item => 
+   {
+      item.addEventListener('shown.bs.dropdown', function(e)
+      {
+         e.currentTarget.classList.add('show');
+      });
+      item.addEventListener('hidden.bs.dropdown', function(e)
+      {
+         e.currentTarget.classList.remove('show');
+      });
+   });
+});
+</script>
 </head>
 <body>
-
-    <h1>Hello World!</h1>
-
+<div id="PageHeader1">
+<div id="wb_Image1">
+<img src="images/logo_saesp.png" id="Image1" alt="" width="100" height="100"></div>
+<div id="wb_DropdownMenu2">
+<div id="DropdownMenu2" class="DropdownMenu2" style="width:100%;height:auto !important;">
+<div class="container">
+<div class="navbar-header">
+<button title="Dropdown Menu" type="button" class="navbar-toggle" data-bs-toggle="collapse" data-bs-target=".DropdownMenu2-navbar-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+</div>
+<div class="DropdownMenu2-navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li class="nav-item">
+<a href="./Index.html" class="nav-link active">Accueil</a>
+</li>
+<li class="nav-item">
+<a href="./Initialisation.html" class="nav-link">Initialisation du système</a>
+</li>
+<li class="nav-item dropdown-hover dropdown">
+<a href="#" class="dropdown-toggle" data-bs-offset="0,1" data-bs-placement="bottom-start" data-bs-toggle="dropdown">Les logiciels<b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li class="nav-item dropdown-item">
+<a href="./Les_principaux_logiciels.html" class="nav-link">Les principaux logiciels</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Installation_logiciels.html" class="nav-link">Installation de nouveaux logiciels</a>
+</li>
+</ul>
+</li>
+<li class="nav-item dropdown-hover dropdown">
+<a href="#" class="dropdown-toggle" data-bs-offset="0,1" data-bs-placement="bottom-start" data-bs-toggle="dropdown">Les investigations<b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li class="nav-item dropdown-item">
+<a href="./Whois_Adresses_IP_et_URL.html" class="nav-link">Whois : Adresses IP et URL</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Whatweb_URL.html" class="nav-link">Whatweb : Serveur de site internet</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Holehe_adresse_mail.html" class="nav-link">Holehe : Adresses mail</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Ignorant_téléphonie.html" class="nav-link">Ignorant : Numéros de téléphone</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Sherlock_pseudo.html" class="nav-link">Sherlock : Pseudonymes</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Telepathy_telegram.html" class="nav-link">Telepathy : Comptes Telegram</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></div>
+</div>
+<div id="wb_LayoutGrid2">
+<div id="LayoutGrid2">
+<div class="row">
+<div class="col-1">
+<div id="wb_LayoutGrid39">
+<div id="LayoutGrid39">
+<div class="row">
+<div class="col-1">
+<div id="wb_Heading1">
+<h1 id="Heading1">Bienvenue sur le système d'assistance à l'Enquêteur Sous Pseudonyme<br><br></h1>
+</div>
+<div id="wb_Shape3">
+<div id="Shape3"></div>
+</div>
+<div id="wb_Heading6">
+<h3 id="Heading6"><br><br>Cet espace a vocation à vous assister tout au long de l'utilisation que vous ferez de cet outil. <br><br>Pour ce faire, trois parties vous accompagnerons :<br><br></h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid4">
+<div id="LayoutGrid4">
+<div class="row">
+<div class="col-1">
+<div id="wb_Card7" class="card">
+   <div id="Card7-card-body">
+      <div id="Card7-card-item0"><a href="./Initialisation.html" class="stretched-link"><i class="fa fa-gears"></i></a></div>
+      <div id="Card7-card-item1">Initialisation du système</div>
+      <div id="Card7-card-item2">Première étape lors de la création d'une nouvelle machine virtuelle, cet espace est là pour vous accompagner dans les premières actions à mettre en oeuvre afin de paramétrer et sécuriser votre environnement de travail. </div>
+   </div>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Card1" class="card">
+   <div id="Card1-card-body">
+      <div id="Card1-card-item0"><a href="./Les_principaux_logiciels.html" class="stretched-link"><i class="fa fa-folder-open-o"></i></a></div>
+      <div id="Card1-card-item1">Les logiciels</div>
+      <div id="Card1-card-item2">Avant le début de votre enquête, cet espace vous permettra d'apprendre le fonctionnement des logiciels principaux, déjà installés dans la machine virtuelle.<br><br>Nous vous proposerons également d'autres solutions qui pourraient vous être utiles dans vos investigations.</div>
+   </div>
+</div>
+</div>
+<div class="col-3">
+<div id="wb_Card2" class="card">
+   <div id="Card2-card-body">
+      <div id="Card2-card-item0"><a href="./Whois_Adresses_IP_et_URL.html" class="stretched-link"><i class="fa fa-search"></i></a></div>
+      <div id="Card2-card-item1">Les investigations</div>
+      <div id="Card2-card-item2">Au cours de votre enquête, cet espace pourra vous aider à analyser les éléments de preuves que vous aurez pu récupérer. <br><br>Nous vous présenterons comment procéder simplement à des recherches concernant des adresses IP ou des URL, ainsi que poursuivre vos investigations sur certaines de vos cibles.</div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>

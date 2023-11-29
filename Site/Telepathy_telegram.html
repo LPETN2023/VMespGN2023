@@ -1,0 +1,469 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Telepathy : Investigations sur Telegram</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="base/jquery-ui.min.css" rel="stylesheet">
+<link href="Site.css" rel="stylesheet">
+<link href="Telepathy_telegram.css" rel="stylesheet">
+<script src="jquery-3.7.1.min.js"></script>
+<script src="jquery-ui.min.js"></script>
+<script src="popper.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="bootstrap.dropdown.min.js" defer></script>
+<script src="wwb18.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(event)
+{
+   var DropdownMenu2_dropdownToggle = document.querySelectorAll('#DropdownMenu2 .dropdown-toggle');
+   DropdownMenu2_dropdownToggle.forEach(item => 
+   {
+      var dropdown = new bootstrap.Dropdown(item, {popperConfig:{placement:item.getAttribute('data-bs-placement')}});
+   });
+   var DropdownMenu2_dropdown = document.querySelectorAll('#DropdownMenu2 .dropdown');
+   DropdownMenu2_dropdown.forEach(item => 
+   {
+      item.addEventListener('shown.bs.dropdown', function(e)
+      {
+         e.currentTarget.classList.add('show');
+      });
+      item.addEventListener('hidden.bs.dropdown', function(e)
+      {
+         e.currentTarget.classList.remove('show');
+      });
+   });
+});
+</script>
+<script>
+$(document).ready(function()
+{
+   $("#Accordion1").accordion(
+   {
+      event: 'click',
+      animate: 'linear',
+      icons: null,
+      active: false,
+      collapsible: true,
+      header: 'h4',
+      heightStyle: 'content'
+   });
+   $("#Accordion1").data("height", $("#Accordion1").outerWidth());
+   $(window).resize(function()
+   {
+      if ($("#Accordion1").data("height") != $("#Accordion1").outerWidth())
+      {
+         $("#Accordion1").accordion("refresh");
+         $("#Accordion1").data("height", $("#Accordion1").outerWidth());
+      }
+   });
+});
+</script>
+</head>
+<body>
+<div id="PageHeader1">
+<div id="wb_Image1">
+<img src="images/logo_saesp.png" id="Image1" alt="" width="100" height="100"></div>
+<div id="wb_DropdownMenu2">
+<div id="DropdownMenu2" class="DropdownMenu2" style="width:100%;height:auto !important;">
+<div class="container">
+<div class="navbar-header">
+<button title="Dropdown Menu" type="button" class="navbar-toggle" data-bs-toggle="collapse" data-bs-target=".DropdownMenu2-navbar-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+</div>
+<div class="DropdownMenu2-navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li class="nav-item">
+<a href="./Index.html" class="nav-link">Accueil</a>
+</li>
+<li class="nav-item">
+<a href="./Initialisation.html" class="nav-link">Initialisation du système</a>
+</li>
+<li class="nav-item dropdown-hover dropdown">
+<a href="#" class="dropdown-toggle" data-bs-offset="0,1" data-bs-placement="bottom-start" data-bs-toggle="dropdown">Les logiciels<b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li class="nav-item dropdown-item">
+<a href="./Les_principaux_logiciels.html" class="nav-link">Les principaux logiciels</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Installation_logiciels.html" class="nav-link">Installation de nouveaux logiciels</a>
+</li>
+</ul>
+</li>
+<li class="nav-item dropdown-hover dropdown">
+<a href="#" class="dropdown-toggle active" data-bs-offset="0,1" data-bs-placement="bottom-start" data-bs-toggle="dropdown">Les investigations<b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li class="nav-item dropdown-item">
+<a href="./Whois_Adresses_IP_et_URL.html" class="nav-link">Whois : Adresses IP et URL</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Whatweb_URL.html" class="nav-link">Whatweb : Serveur de site internet</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Holehe_adresse_mail.html" class="nav-link">Holehe : Adresses mail</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Ignorant_téléphonie.html" class="nav-link">Ignorant : Numéros de téléphone</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Sherlock_pseudo.html" class="nav-link">Sherlock : Pseudonymes</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Telepathy_telegram.html" class="nav-link active">Telepathy : Comptes Telegram</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></div>
+</div>
+
+<div id="wb_LayoutGrid3">
+<div id="LayoutGrid3">
+<div class="row">
+<div class="col-1">
+<div id="wb_Heading7">
+<h1 id="Heading7">Telepathy : Investigations sur Telegram</h1>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid2">
+<div id="LayoutGrid2">
+<div class="row">
+<div class="col-1">
+<div id="wb_Heading3">
+<h3 id="Heading3">La machine virtuelle dispose d'une distribution linux intégrée, qui vous permet d'utiliser des outils de recherches en sources ouvertes ou d'aide aux investigations. <br><br>Choisissez ci-dessous le type d'investigations que vous souhaitez mener et laissez vous guider dans la création de ligne de commande nécessaire.<br><br>Cette ligne de commande devra simplement être copiée/collée dans le terminal WSL.</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid15">
+<div id="LayoutGrid15">
+<div class="col-1">
+<div id="wb_Image2">
+<a href="javascript:popupwnd('./images/om63gure97.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/om63gure97.jpg" id="Image2" alt="" width="257" height="40"></a>
+</div>
+</div>
+<div class="col-2">
+</div>
+<div class="col-3">
+<div id="wb_Image3">
+<a href="javascript:popupwnd('./images/n4h34024fx.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/n4h34024fx.jpg" id="Image3" alt="" width="229" height="43"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid4">
+<div id="LayoutGrid4">
+<div class="col-1">
+<div id="wb_Image4">
+<a href="javascript:popupwnd('./images/0j0w5viaet.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/0j0w5viaet.jpg" id="Image4" alt="" width="746" height="420"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid5">
+<div id="LayoutGrid5">
+<div class="col-1">
+<div id="wb_Heading1">
+<h1 id="Heading1">Telepathy</h1>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid8">
+<div id="LayoutGrid8">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text6">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Telepathy est un système permettant de procéder à des investigations ou de récupérer des données présentes sur l'application &quot;Telegram&quot;. </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid9">
+<div id="LayoutGrid9">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text7">
+<span style="color:#FF0000;font-family:Arial;font-size:16px;"><strong><u>Attention, certaines donn&#0233;es r&#0233;cup&#0233;r&#0233;es peuvent &#0234;tre couvertes par les droits RGPD. Une fois celles-ci entr&#0233;es en proc&#0233;dure, vous devez imp&#0233;rativement les supprimer de votre syst&#0232;me. Leur pr&#0233;servation est interdite. </u></strong></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid14">
+<div id="LayoutGrid14">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text8">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Avant de pouvoir utiliser &quot;Telepathy&quot;, vous devez disposer d'un compte &quot;Telegram&quot; et suivre les indications ci-dessous : </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid1">
+<div id="LayoutGrid1">
+<div class="row">
+<div class="col-1">
+<div id="wb_Accordion1">
+<div id="Accordion1">
+<h4><span class="ui-accordion-header-icon ui-icon"><svg class="icon-default" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg">
+   <path d="M37 27 C37 27, 37 27, 37 28 C37 29, 37 29, 37 29 L23 43 C22 44, 22 44, 21 44 C21 44, 20 44, 20 43 C20 43, 19 43, 19 42 L19 14 C19 13, 20 13, 20 13 C20 12, 21 12, 21 12 C22 12, 22 12, 23 13"/>
+</svg>
+<svg class="icon-active" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg">
+   <path d="M44 20 C44 20, 44 20, 44 21 C44 22, 44 22, 44 22 L30 36 C29 37, 29 37, 28 37 C28 37, 27 37, 27 36 L13 22 C13 22, 12 22, 12 21 C12 20, 13 20, 13 20 C13 19, 14 19, 14 19 L42 19 C43 19, 43 19, 44 20"/>
+</svg>
+</span>Paramétrage initial</h4>
+<div>
+<div id="wb_LayoutGrid10">
+<div id="LayoutGrid10">
+<div class="row">
+<div class="col-1">
+<div id="wb_Heading2">
+<h3 id="Heading2">1) Procurez-vous un numéro "API"</h3>
+</div>
+<div id="wb_Text1">
+<span style="color:#000000;font-family:Arial;font-size:13px;"><br><br></span><span style="color:#000000;font-family:Arial;font-size:16px;">Assurez-vous d'être connectés à votre compte &quot;Telegram&quot; et de disposer du numéro de téléphone auquel il est lié. Rendez-vous ensuite sur le site &quot;</span><span style="color:#0000FF;font-family:Arial;font-size:16px;"><strong><u><a href="https://my.telegram.org">https://my.telegram.org</a></u></strong></span><span style="color:#000000;font-family:Arial;font-size:16px;">&quot;.<br><br>Il vous est demandé d'entrer le numéro de téléphone de votre compte &quot;Telegram&quot;. Un code vous sera envoyé en message privé sur l'application, qu'il faudra indiquer sur le site internet. </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid11">
+<div id="LayoutGrid11">
+<div class="col-1">
+<div id="wb_Image5">
+<a href="javascript:popupwnd('./images/Capture_API_Telegram.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_API_Telegram.png" id="Image5" alt="" width="437" height="312"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid12">
+<div id="LayoutGrid12">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text3">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Laissez cette page ouverte, vous aurez besoin de certaines informations qu'elle contient. <br><br><br></span>
+</div>
+<div id="wb_Heading4">
+<h3 id="Heading4">2) Procédez au paramétrage de "Telepathy"</h3>
+</div>
+<div id="wb_Text9">
+<span style="color:#000000;font-family:Arial;font-size:16px;"><br><br>Lancez ensuite le terminal &quot;WSL&quot; comme expliqué au début de la page. Utilisez la commande &quot;telepathy&quot; et suivez ces étapes :<br><br> </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid13">
+<div id="LayoutGrid13">
+<div class="col-1">
+<div id="wb_Image7">
+<a href="javascript:popupwnd('./images/Capture_parametrage_telepathy.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_parametrage_telepathy.png" id="Image7" alt="" width="357" height="255"></a>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Text4">
+<p>Après avoir entré la commande "telepathy" dans le terminal WSL, il vous est demandé d'entrer successivement les éléments suivants : </p>
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">API ID et API Hash </span>: Ces éléments se trouvent sur le site internet "my.telegram.org", consulté précédemment
+</li>
+</ul>
+<br>
+<br>
+</div>
+<div id="wb_Image8">
+<a href="javascript:popupwnd('./images/Capture_API_site_telegram.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_API_site_telegram.png" id="Image8" alt="" width="518" height="94"></a>
+</div>
+<div id="wb_Text5">
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Numéro de téléphone ou "bot token"</span><span style="font-size:13px;line-height:16px;"> : </span>Il s'agit du numéro de téléphone lié à votre compte "Telegram".
+</li>
+</ul>
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Code reçu </span>: Il s'agit d'un code que vous allez recevoir en message privé sur votre compte "Telegram"
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid6">
+<div id="LayoutGrid6">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text2">
+<span style="color:#000000;font-family:Arial;font-size:16px;"><br><br>Une fois le premier paramétrage effectué, lancez le programme à l'aide de la commande &quot;telepathy&quot;. <br><br>A chaque nouvelle utilisation, il vous sera demandé d'indiquer le numéro de téléphone lié à votre compte &quot;Telegram&quot;, ainsi que le nouveau code reçu en message privé, comme lors du paramétrage initial. <br><br>Ceci fait, vous pouvez commencer à lancer les commandes que vous souhaitez utiliser. </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid7">
+<div id="LayoutGrid7">
+<div class="col-1">
+<div id="wb_Heading5">
+<h3 id="Heading5">Récupération d'un "canal Telegram"</h3>
+</div>
+<div id="wb_Text10">
+<span style="color:#000000;font-family:Arial;font-size:16px;"><br><br>Il vous faut récupérer le nom du &quot;canal&quot;. Il s'agit de la suite alpha-numérique se trouvant après &quot;t.me/&quot;. <br><br>Dans notre exemple, il s'agit de &quot;BFMTV_FR&quot;.<br><br>Indiquez ensuite ce nom dans le champs du formulaire ci-dessous, qui va vous générer la commande à entrer dans votre terminal &quot;WSL&quot;. <br><br>Si la case &quot;<u>extraire les média ?</u>&quot; est cochée, l'ensemble des médias du &quot;canal&quot; seront téléchargés. Ceci peut considérablement augmenter le temps de traitement. Il vous faudra également faire attention à la légalité des médias qui seront alors stockés sur votre système. <br><br>Le résultat de l'extraction sera placé dans un dossier, sur le bureau de votre machine virtuelle. </span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Image6">
+<a href="javascript:popupwnd('./images/3mm2jcv09j.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/3mm2jcv09j.jpg" id="Image6" alt="" width="286" height="168"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid17">
+<div id="LayoutGrid17">
+<div class="col-1">
+<div id="wb_Heading6">
+<h3 id="Heading6">Récupération d'informations sur un utilisateur</h3>
+</div>
+<div id="wb_Text11">
+<span style="color:#000000;font-family:Arial;font-size:16px;"><br>Vous pouvez également récupérer des informations sur un utilisateur à l'aide de son &quot;ID&quot; ou du nom de compte au format &quot;@nom_de_compte&quot;. Pour connaitre ce dernier, il vous faudra préalablement ajouté l'utilisateur en tant qu'ami, puis consulter son profil. </span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Image9">
+<a href="javascript:popupwnd('./images/vgwupsveam.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/vgwupsveam.jpg" id="Image9" alt="" width="177" height="183"></a>
+</div>
+</div>
+</div>
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Telepathy Phrases</title>
+  </head>
+<body>
+
+  <h1>Récupération d'un "canal" Telegram</h1>
+
+  <form>
+    <label for="telepathyChatInput">Entrez le nom du "canal" :</label>
+    <input type="text" id="telepathyChatInput" placeholder="(Format : @canal)" onkeydown="if(event.key==='Enter'){generateAndCopyTelepathy('chanel')}">
+
+    <label for="addSuffixChat">Extraire les médias?</label>
+    <input type="checkbox" id="addSuffixChat">
+    
+    <button type="button" onclick="generateAndCopyTelepathy('chanel')">Générer</button>
+
+    <span class="copyButton" onclick="copyToClipboardTelepathy('chanel')">
+      <span>📋</span>
+    </span>
+  </form>
+
+  <p id="resultTelepathyChat"></p>
+  <br>
+  <br>
+  <h1>Utilisateur</h1>
+
+  <form>
+    <label for="telepathyUserInput">Entrez le nom d'utilisateur :</label>
+    <input type="text" id="telepathyUserInput" placeholder="(Format : @utilisateur)" onkeydown="if(event.key==='Enter'){generateAndCopyTelepathy('user')}">
+
+    <button type="button" onclick="generateAndCopyTelepathy('user')">Générer</button>
+
+    <span class="copyButton" onclick="copyToClipboardTelepathy('user')">
+      <span>📋</span>
+    </span>
+  </form>
+
+  <p id="resultTelepathyUser"></p>
+
+  <script>
+    function generateAndCopyTelepathy(type) {
+      generatePhraseTelepathy(type);
+      copyToClipboardTelepathy(type);
+    }
+
+    function generatePhraseTelepathy(type) {
+      var telepathyInput;
+      var resultElement;
+
+      if (type === 'chanel') {
+        telepathyInput = document.getElementById('telepathyChatInput');
+        var addSuffixCheckbox = document.getElementById('addSuffixChat');
+        resultElement = document.getElementById('resultTelepathyChat');
+        
+        var telepathy = telepathyInput.value;
+        var addSuffix = addSuffixCheckbox.checked;
+
+        if (telepathy) {
+          var phrase = 'telepathy -t ' + telepathy + ' -c -f';
+          
+          if (addSuffix) {
+            phrase += ' -m';
+          }
+
+          phrase += '; cp -r ./telepathy_files/' + telepathy + ' "$(wslpath "$(powershell.exe \'[System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::DesktopDirectory)\'")" | tr -d \'\\r\')"; rm -R ./telepathy_files/' + telepathy;
+          resultElement.innerHTML = '<strong>' + phrase + '</strong>';
+        } else {
+          resultElement.innerHTML = '<strong>Veuillez entrer quelque chose pour Telepathy ' + type + '.</strong>';
+        }
+      } else if (type === 'user') {
+        telepathyInput = document.getElementById('telepathyUserInput');
+        resultElement = document.getElementById('resultTelepathyUser');
+        
+        var telepathyUser = telepathyInput.value;
+
+        if (telepathyUser) {
+          var userPhrase = 'telepathy -t ' + telepathyUser + ' -u';
+          resultElement.innerHTML = '<strong>' + userPhrase + '</strong>';
+        } else {
+          resultElement.innerHTML = '<strong>Veuillez entrer quelque chose pour Telepathy ' + type + '.</strong>';
+        }
+      }
+    }
+
+    function copyToClipboardTelepathy(type) {
+      var resultElement;
+
+      if (type === 'chanel') {
+        resultElement = document.getElementById('resultTelepathyChat');
+      } else if (type === 'user') {
+        resultElement = document.getElementById('resultTelepathyUser');
+      }
+
+      var textToCopy = resultElement.textContent;
+
+      var tempInput = document.createElement('input');
+      tempInput.value = textToCopy;
+      document.body.appendChild(tempInput);
+
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+    }
+  </script>
+
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Initialisation du système</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="base/jquery-ui.min.css" rel="stylesheet">
+<link href="font-awesome.min.css" rel="stylesheet">
+<link href="Site.css" rel="stylesheet">
+<link href="Initialisation.css" rel="stylesheet">
+<script src="jquery-3.7.1.min.js"></script>
+<script src="jquery-ui.min.js"></script>
+<script src="popper.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="bootstrap.dropdown.min.js" defer></script>
+<script src="wwb18.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(event)
+{
+   var DropdownMenu2_dropdownToggle = document.querySelectorAll('#DropdownMenu2 .dropdown-toggle');
+   DropdownMenu2_dropdownToggle.forEach(item => 
+   {
+      var dropdown = new bootstrap.Dropdown(item, {popperConfig:{placement:item.getAttribute('data-bs-placement')}});
+   });
+   var DropdownMenu2_dropdown = document.querySelectorAll('#DropdownMenu2 .dropdown');
+   DropdownMenu2_dropdown.forEach(item => 
+   {
+      item.addEventListener('shown.bs.dropdown', function(e)
+      {
+         e.currentTarget.classList.add('show');
+      });
+      item.addEventListener('hidden.bs.dropdown', function(e)
+      {
+         e.currentTarget.classList.remove('show');
+      });
+   });
+});
+</script>
+<script>
+$(document).ready(function()
+{
+   $("#Accordion1").accordion(
+   {
+      event: 'click',
+      animate: 'linear',
+      icons: null,
+      active: false,
+      collapsible: true,
+      header: 'h4',
+      heightStyle: 'content'
+   });
+   $("#Accordion1").data("height", $("#Accordion1").outerWidth());
+   $(window).resize(function()
+   {
+      if ($("#Accordion1").data("height") != $("#Accordion1").outerWidth())
+      {
+         $("#Accordion1").accordion("refresh");
+         $("#Accordion1").data("height", $("#Accordion1").outerWidth());
+      }
+   });
+});
+</script>
+</head>
+<body>
+<div id="PageHeader1">
+<div id="wb_Image1">
+<img src="images/logo_saesp.png" id="Image1" alt="" width="100" height="100"></div>
+<div id="wb_DropdownMenu2">
+<div id="DropdownMenu2" class="DropdownMenu2" style="width:100%;height:auto !important;">
+<div class="container">
+<div class="navbar-header">
+<button title="Dropdown Menu" type="button" class="navbar-toggle" data-bs-toggle="collapse" data-bs-target=".DropdownMenu2-navbar-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+</div>
+<div class="DropdownMenu2-navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li class="nav-item">
+<a href="./Index.html" class="nav-link">Accueil</a>
+</li>
+<li class="nav-item">
+<a href="./Initialisation.html" class="nav-link active">Initialisation du système</a>
+</li>
+<li class="nav-item dropdown-hover dropdown">
+<a href="#" class="dropdown-toggle" data-bs-offset="0,1" data-bs-placement="bottom-start" data-bs-toggle="dropdown">Les logiciels<b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li class="nav-item dropdown-item">
+<a href="./Les_principaux_logiciels.html" class="nav-link">Les principaux logiciels</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Installation_logiciels.html" class="nav-link">Installation de nouveaux logiciels</a>
+</li>
+</ul>
+</li>
+<li class="nav-item dropdown-hover dropdown">
+<a href="#" class="dropdown-toggle" data-bs-offset="0,1" data-bs-placement="bottom-start" data-bs-toggle="dropdown">Les investigations<b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li class="nav-item dropdown-item">
+<a href="./Whois_Adresses_IP_et_URL.html" class="nav-link">Whois : Adresses IP et URL</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Whatweb_URL.html" class="nav-link">Whatweb : Serveur de site internet</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Holehe_adresse_mail.html" class="nav-link">Holehe : Adresses mail</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Ignorant_téléphonie.html" class="nav-link">Ignorant : Numéros de téléphone</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Sherlock_pseudo.html" class="nav-link">Sherlock : Pseudonymes</a>
+</li>
+<li class="nav-item dropdown-item">
+<a href="./Telepathy_telegram.html" class="nav-link">Telepathy : Comptes Telegram</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div></div>
+</div>
+<div id="wb_LayoutGrid3">
+<div id="LayoutGrid3">
+<div class="row">
+<div class="col-1">
+<div id="wb_Heading7">
+<h1 id="Heading7">Initialisation du système</h1>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid36">
+<div id="LayoutGrid36">
+<div class="row">
+<div class="col-1">
+<div id="wb_Heading3">
+<h3 id="Heading3">Certaines actions sont à réaliser à chaque démarrage de la machine virtuelle. Vous les trouverez dans la partie "Actes réflexes". <br><br>Au moment de la première initialisation, veuillez suivre les instructions présentes dans la partie "Premier paramétrage". Ceci vous permettra d'utiliser la machine virtuelle de manière simple et efficace.</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid39">
+<div id="LayoutGrid39">
+<div class="row">
+<div class="col-1">
+<div id="wb_Accordion1">
+<div id="Accordion1">
+<h4><span class="ui-accordion-header-icon ui-icon"><svg class="icon-default" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg">
+   <path d="M37 27 C37 27, 37 27, 37 28 C37 29, 37 29, 37 29 L23 43 C22 44, 22 44, 21 44 C21 44, 20 44, 20 43 C20 43, 19 43, 19 42 L19 14 C19 13, 20 13, 20 13 C20 12, 21 12, 21 12 C22 12, 22 12, 23 13"/>
+</svg>
+<svg class="icon-active" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg">
+   <path d="M44 20 C44 20, 44 20, 44 21 C44 22, 44 22, 44 22 L30 36 C29 37, 29 37, 28 37 C28 37, 27 37, 27 36 L13 22 C13 22, 12 22, 12 21 C12 20, 13 20, 13 20 C13 19, 14 19, 14 19 L42 19 C43 19, 43 19, 44 20"/>
+</svg>
+</span>Actes réflexes</h4>
+<div>
+<div id="wb_LayoutGrid35">
+<div id="LayoutGrid35">
+<div class="row">
+<div class="col-1">
+<div id="wb_Heading6">
+<h3 id="Heading6">Il s'agit de l'ensemble des actions devant systématiquement être effectuées au début de chaque lancement de la machine virtuelle.</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid5">
+<div id="LayoutGrid5">
+<div class="row">
+<div class="col-1">
+<div id="wb_Checkbox3">
+<input type="checkbox" id="Checkbox3" name="MAJ_OS" value="off"><label for="Checkbox3"></label>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Text3">
+<p style="font-size:13px;line-height:16px;"><span style="text-decoration:underline;font-size:16px;line-height:18px;font-weight:bold;">Mise à jour du système d'exploitation </span><span style="font-size:16px;line-height:18px;">:</span></p>
+<p style="font-size:13px;line-height:16px;">&nbsp;</p>
+<p>En premier lieu, vérifiez que le système d'exploitation installé sur la machine virtuelle est à jour : </p>
+<br>
+<p style="font-size:13px;line-height:16px;">&nbsp;</p>
+</div>
+<div id="wb_LayoutGrid11">
+<div id="LayoutGrid11">
+<div class="col-1">
+<div id="wb_Champ_recherche_maj">
+<a href="javascript:popupwnd('./images/Recherche_vérifier_les_MAJ.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Recherche_vérifier_les_MAJ.png" id="Champ_recherche_maj" alt="" width="228" height="39"></a>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Icon1">
+<div id="Icon1"><i class="fa fa-arrow-right"></i></div>
+</div>
+</div>
+<div class="col-3">
+<div id="wb_Bouton_recherche_maj">
+<a href="javascript:popupwnd('./images/Bouton_vérifier_les_MAJ.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Bouton_vérifier_les_MAJ.png" id="Bouton_recherche_maj" alt="" width="222" height="38"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid7">
+<div id="LayoutGrid7">
+<div class="col-1">
+<div id="wb_Recherche_maj_windows">
+<a href="javascript:popupwnd('./images/Lancement_recherche_MAJ.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Lancement_recherche_MAJ.png" id="Recherche_maj_windows" alt="" width="684" height="58"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid8">
+<div id="LayoutGrid8">
+<div class="col-1">
+<div id="wb_Recherche_maj_facultatives">
+<a href="javascript:popupwnd('./images/Bouton_mise_à_jour_facultatives.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Bouton_mise_à_jour_facultatives.png" id="Recherche_maj_facultatives" alt="" width="684" height="42"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid9">
+<div id="LayoutGrid9">
+<div class="col-1">
+<div id="wb_option_avancées_maj_facultatives">
+<a href="javascript:popupwnd('./images/Bouton_options_avancées.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Bouton_options_avancées.png" id="option_avancées_maj_facultatives" alt="" width="681" height="39"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid10">
+<div id="LayoutGrid10">
+<div class="col-1">
+<div id="wb_maj_facultative_windows">
+<a href="javascript:popupwnd('./images/Lancement_MAJ_facultatives.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Lancement_MAJ_facultatives.png" id="maj_facultative_windows" alt="" width="682" height="161"></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid4">
+<div id="LayoutGrid4">
+<div class="row">
+<div class="col-1">
+<div id="wb_Checkbox2">
+<input type="checkbox" id="Checkbox2" name="MAJ_applications" value="off"><label for="Checkbox2"></label>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Text2">
+<p style="font-weight:bold;"><span style="text-decoration:underline;">Mise à jour des applications : </span></p>
+<br>
+<p style="font-size:13px;line-height:16px;"><span style="font-size:16px;line-height:18px;">Cette machine virtuelle est dotée d'une fonction de mise à jour automatique des applications initialement installées, ainsi que celles ajoutées via la procédure décrite dans la partie "Les logiciels". </span></p>
+</div>
+<div id="wb_LayoutGrid42">
+<div id="LayoutGrid42">
+<div class="col-1">
+<div id="wb_Text29">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Dans le dossier &quot;ESP&quot;, présent sur le bureau, double cliquez sur le fichier nommé &quot;Mise à jour du système&quot;.<br><br>Plusieurs phases de mises à jour vont ainsi être lancées. Veillez à accepter toutes les demandes qui vous sont faites. <br><br>A partir d'une certaine étape, il vous sera demandé si vous souhaitez également mettre à jour la distribution Linux présente dans la machine virtuelle. <br><br>Pour refuser, tapez n (non) et pour accepter, tapez o (oui). <br><br>En cas d'acceptation, il vous sera demandé le mot de passe que vous avez paramétré lors de l'initialisation du système. Il s'agit du mot de passe Linux, pas celui de votre session utilisateur. Si vous utilisez la version préinstallée du projet, le mot de passe se trouve dans le tutoriel d'import du fichier &quot;.ova&quot;.<br><br>S'il est correctement entré, la mise à jour va se poursuivre et vous serez informé de la fin de ces opérations. </span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_maj_système_logo">
+<a href="javascript:popupwnd('./images/ighue8mlun.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/ighue8mlun.jpg" id="maj_système_logo" alt="" width="110" height="133"></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid2">
+<div id="LayoutGrid2">
+<div class="col-1">
+<div id="wb_Checkbox1">
+<input type="checkbox" id="Checkbox1" name="start_VPN" value="off"><label for="Checkbox1"></label>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Text1">
+<p style="font-weight:bold;"><span style="text-decoration:underline;">Vérifier son anonymisation : </span></p>
+<br>
+<p>Vérifiez que votre système d'anonymisation soit bien activé. Si vous utilisez le système "Spadassin", n'oubliez pas de vous rendre dans son interface d'utilisation (10.0.0.1/adm) et de choisir un mode de connexion (Libre, VPN, TOR). </p>
+<br>
+<p>Lancez ensuite le logiciel "My External IP" afin de vérifier que l'adresse IP qui s'y affiche est bien celle de votre système d'anonymisation. </p>
+<p style="font-size:13px;line-height:16px;">&nbsp;</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h4><span class="ui-accordion-header-icon ui-icon"><svg class="icon-default" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg">
+   <path d="M37 27 C37 27, 37 27, 37 28 C37 29, 37 29, 37 29 L23 43 C22 44, 22 44, 21 44 C21 44, 20 44, 20 43 C20 43, 19 43, 19 42 L19 14 C19 13, 20 13, 20 13 C20 12, 21 12, 21 12 C22 12, 22 12, 23 13"/>
+</svg>
+<svg class="icon-active" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg">
+   <path d="M44 20 C44 20, 44 20, 44 21 C44 22, 44 22, 44 22 L30 36 C29 37, 29 37, 28 37 C28 37, 27 37, 27 36 L13 22 C13 22, 12 22, 12 21 C12 20, 13 20, 13 20 C13 19, 14 19, 14 19 L42 19 C43 19, 43 19, 44 20"/>
+</svg>
+</span>Premier paramétrage</h4>
+<div>
+<div id="wb_LayoutGrid6">
+<div id="LayoutGrid6">
+<div class="row">
+<div class="col-1">
+<div id="wb_Heading1">
+<h3 id="Heading1">Cette partie ne concerne que les pramétrages à effectuer lors du premier montage de la machine virtuelle. <br>Elle ne sera plus à réaliser par la suite. </h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid12">
+<div id="LayoutGrid12">
+<div class="col-1">
+<div id="wb_Text4">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Une fois la machine virtuelle lancée, cliquez sur &quot;Périphériques&quot; puis cliquez sur &quot;Insérer l'image CD des additions invités&quot;.</span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Image2">
+<a href="javascript:popupwnd('./images/Capture_périphérique_additions.png','no','no','no','yes','no','no','','','800','800')" target="_self"><img src="images/Capture_périphérique_additions.png" id="Image2" alt="" width="276" height="118"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid13">
+<div id="LayoutGrid13">
+<div class="col-1">
+<div id="wb_Text5">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Ceci simule l'ajout d'un lecteur CD virtuel, qu'il vous sera proposé d'ouvrir. Lancez alors le fichier exécutable correspondant à votre ordinateur (Généralement &quot;VBoxWindowsAdditions-amd64&quot;).<br><br>Cette étape nécessitera un redémarrage du système d'exploitation. </span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_capture_CD">
+<a href="javascript:popupwnd('./images/Capture_execution_CD.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_execution_CD.png" id="capture_CD" alt="" width="273" height="93"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid14">
+<div id="LayoutGrid14">
+<div class="col-1">
+</div>
+<div class="col-2">
+<div id="wb_capture_guest_additions">
+<a href="javascript:popupwnd('./images/Capture_CD.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_CD.png" id="capture_guest_additions" alt="" width="273" height="73"></a>
+</div>
+</div>
+</div>
+</div>
+<hr id="HorizontalLine1">
+<div id="wb_LayoutGrid15">
+<div id="LayoutGrid15">
+<div class="col-1">
+<div id="wb_Text6">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Il sera ensuite nécessaire de retourner dans le menu &quot;Périphériques&quot; puis de cliquer sur &quot;Upgrade Guest Addition...&quot;.</span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_capture_upgrade_guest_additions">
+<a href="javascript:popupwnd('./images/Capture_peripherique_upgrade_additions.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_peripherique_upgrade_additions.png" id="capture_upgrade_guest_additions" alt="" width="273" height="117"></a>
+</div>
+</div>
+</div>
+</div>
+<hr id="HorizontalLine2">
+<div id="wb_LayoutGrid17">
+<div id="LayoutGrid17">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text7">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Les trois paramétrages suivants seront à définir par l'utilisateur, qui devra décider du niveau de sécurité qu'il estimera nécessaire à l'accomplissement de sa mission et à la sécurité de ses outils. Ils se situent également dans l'onglet &quot;Périphériques&quot;. </span>
+</div>
+<div id="wb_Text14">
+<span style="color:#000000;font-family:Arial;font-size:16px;"><u><br></u></span><span style="color:#FF0000;font-family:Arial;font-size:16px;"><u>Les options suivantes seront à éviter dès lors que l'enquête portera sur des personnes disposant vraisemblablement de connaissances informatiques avancées, ou s'il est prévu de laisser un virus infécter volontairement la machine virtuelle afin de s'en servir d'élément de preuve. <br></u></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid18">
+<div id="LayoutGrid18">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text8">
+<span style="color:#000000;font-family:Arial;font-size:16px;"><strong>Dossier partagé<br></strong></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid16">
+<div id="LayoutGrid16">
+<div class="col-1">
+<div id="wb_Text9">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Cette option permettra à l'utilisateur de disposer d'un dossier qui sera partagé entre sa machine hôte et la machine virtuelle, afin d'échanger des fichiers entre les deux. <br></span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_capture_dossier_partagé">
+<a href="javascript:popupwnd('./images/7smklgutv8.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/7smklgutv8.jpg" id="capture_dossier_partagé" alt="" width="349" height="99"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid1">
+<div id="LayoutGrid1">
+<div class="col-1">
+<div id="wb_Text10">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Pour mettre en place ce dossier partagé, cliquez sur &quot;Périphériques &gt; Dossiers partagés &gt; Réglage des dossiers partagés...&quot;. <br><br>Cliquez sur le logo de dossier bleu avec un &quot;+&quot; vert, sur la droite de la fenêtre : </span>
+</div>
+<div id="wb_LayoutGrid19">
+<div id="LayoutGrid19">
+<div class="col-1">
+<div id="wb_logo_ajout_dossier_partagé">
+<a href="javascript:popupwnd('./images/cwa7mi6dj2.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/cwa7mi6dj2.jpg" id="logo_ajout_dossier_partagé" alt="" width="31" height="31"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_Text11">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Configurez le fenêtre &quot;Ajouter un dossier partagé&quot; comme suit : <u><br><br>Chemin du dossier </u>: Dossier sur votre ordinateur &quot;hôte&quot;, qui sera partagé avec votre machine virtuelle. <br><br>Cochez les cases &quot;Montage automatique&quot; et &quot;Configuration permanente&quot;. <br></span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_capture_parametrage_dossier_partagé">
+<a href="javascript:popupwnd('./images/p21l06lxxh.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/p21l06lxxh.jpg" id="capture_parametrage_dossier_partagé" alt="" width="349" height="211"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid22">
+<div id="LayoutGrid22">
+<div class="col-1">
+<div id="wb_Text15">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Le dossier partagé est ainsi accessible, sur la machine virtuelle, depuis l'onglet &quot;Réseau&quot; de l'explorateur de fichiers. </span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_capture_réseau">
+<a href="javascript:popupwnd('./images/hl6tl8ak8a.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/hl6tl8ak8a.jpg" id="capture_réseau" alt="" width="349" height="328"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid20">
+<div id="LayoutGrid20">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text12">
+<span style="color:#000000;font-family:Arial;font-size:16px;"><strong>Presse-papier partagé et glisser / déposer</strong></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid21">
+<div id="LayoutGrid21">
+<div class="col-1">
+<div id="wb_Text13">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Cette option offre la possibilité d'effectuer des &quot;copiés / collés&quot; entre la machine &quot;hôte&quot; et la machine virtuelle. <br><br><strong><u>Disabled</u></strong> : Fonction désactivée<br><strong><u>Hôte vers invité </u></strong>: Fonction ouverte de l'ordinateur hôte vers la machine virtuelle<br><strong><u>Invité vers hôte </u></strong>: Fonction ouverte de la machine virtuelle vers l'ordinateur &quot;hôte&quot;<br><strong><u>Bidirectionnel</u></strong> : Fonction possible dans les deux sens<br></span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_capture_presse_papier">
+<a href="javascript:popupwnd('./images/ywkchgu8v4.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/ywkchgu8v4.jpg" id="capture_presse_papier" alt="" width="349" height="114"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid23">
+<div id="LayoutGrid23">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text16">
+<span style="color:#000000;font-family:Arial;font-size:16px;"><strong>Ajout du numéro de licence et création d'un point de sauvegarde (Instantané)</strong></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid24">
+<div id="LayoutGrid24">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text17">
+<span style="color:#000000;font-family:Arial;font-size:16px;">A ce stade, vous utilisez une version d'essai du système d'exploration de &quot;Windows 11&quot;. Afin de la rendre valide dans le temps, vous devez ajouter un numéro de licence (devant être acheté préalablement). Cette partie est facultative et dépend de la volonté de l'utilisateur. <br><br>Si vous souhaitez ajouter un numéro de licence, suivez ces étapes : </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid25">
+<div id="LayoutGrid25">
+<div class="col-1">
+<div id="wb_champ_activation">
+<a href="javascript:popupwnd('./images/Capture_activation.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_activation.png" id="champ_activation" alt="" width="266" height="42"></a>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Icon2">
+<div id="Icon2"><i class="fa fa-arrow-right"></i></div>
+</div>
+</div>
+<div class="col-3">
+<div id="wb_bouton_activation">
+<a href="javascript:popupwnd('./images/76jrnecuum.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/76jrnecuum.jpg" id="bouton_activation" alt="" width="216" height="53"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid26">
+<div id="LayoutGrid26">
+<div class="col-1">
+<div id="wb_capture_activation">
+<a href="javascript:popupwnd('./images/1wqwlkiy3y.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/1wqwlkiy3y.jpg" id="capture_activation" alt="" width="636" height="496"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid27">
+<div id="LayoutGrid27">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text18">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Dans la partie &quot;Modifier la clé de produit (Product Key), cliquez sur &quot;Modifier&quot; et ajoutez une clé produit correspondant à Windows 11 Professionnel. </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid28">
+<div id="LayoutGrid28">
+<div class="row">
+<div class="col-1">
+<div id="wb_Text19">
+<span style="color:#000000;font-family:Arial;font-size:16px;">A cette étape, l'ensemble des paramétrages initiaux sont terminés. Afin de nous permettre de revenir à ce stade de la machine virtuelle à chaque début d'une nouvelle enquête sous pseudonyme, il est nécessaire de définir un point de sauvegarde. Pour ce faire, nous allons utiliser la fonction &quot;Instantanné&quot; du logiciel &quot;Virtual Box&quot;. <br><br>Il sera possible de revenir à ce point chaque fois que nécessaire, en supprimant toute trace d'utilisation ultérieure de la machine virtuelle. </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid29">
+<div id="LayoutGrid29">
+<div class="col-1">
+<div id="wb_Text20">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Cliquez sur &quot;Machine&quot; puis &quot;Prendre un instantané...&quot;</span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_capture_menu_instantané">
+<a href="javascript:popupwnd('./images/ikmqtglu1p.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/ikmqtglu1p.jpg" id="capture_menu_instantané" alt="" width="349" height="197"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid30">
+<div id="LayoutGrid30">
+<div class="col-1">
+<div id="wb_Text21">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Modifiez le nom et la description de l'instantané, avec des termes permettant de l'identifier clairement. </span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_capture_champs_instantané">
+<a href="javascript:popupwnd('./images/93tk00q7x8.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/93tk00q7x8.jpg" id="capture_champs_instantané" alt="" width="349" height="249"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid31">
+<div id="LayoutGrid31">
+<div class="col-1">
+<div id="wb_Text22">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Une fois votre enquête terminée, si vous souhaitez revenir à ce point de restauration, fermez la machine virtuelle et revenez sur le logiciel &quot;VirtualBox&quot; depuis votre machine &quot;hôte&quot;. <br><br>Au niveau de la ligne correspondant à votre machine virtuelle, cliquez sur le logo : </span>
+</div>
+<div id="wb_LayoutGrid34">
+<div id="LayoutGrid34">
+<div class="col-1">
+<div id="wb_logo_instantané">
+<a href="javascript:popupwnd('./images/cjw8l2ljy9.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/cjw8l2ljy9.jpg" id="logo_instantané" alt="" width="37" height="36"></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_capture_vm_instantané">
+<a href="javascript:popupwnd('./images/oyp2ac1jh2.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/oyp2ac1jh2.jpg" id="capture_vm_instantané" alt="" width="349" height="136"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_LayoutGrid33">
+<div id="LayoutGrid33">
+<div class="col-1">
+<div id="wb_Text23">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Selectionnez l'instantané souhaité et cliquez sur le bouton &quot;Restaurer&quot;</span>
+</div>
+<div id="wb_LayoutGrid32">
+<div id="LayoutGrid32">
+<div class="col-1">
+<div id="wb_logo_restauration">
+<a href="javascript:popupwnd('./images/6pm5pl15nk.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/6pm5pl15nk.jpg" id="logo_restauration" alt="" width="55" height="64"></a>
+</div>
+</div>
+</div>
+</div>
+<div id="wb_Text24">
+<span style="color:#000000;font-family:Arial;font-size:16px;">Choisissez si vous souhaitez un nouvel instantané ou non, et cliquez sur &quot;Restaurer&quot;.</span>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_capture_question_instantané">
+<a href="javascript:popupwnd('./images/vjwfpmbpmx.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/vjwfpmbpmx.jpg" id="capture_question_instantané" alt="" width="349" height="228"></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
