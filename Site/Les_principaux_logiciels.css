@@ -13,8 +13,8 @@ body
 {
    background: linear-gradient(to top left, #000000, rgba(0,0,0,0.00), #000000), linear-gradient(to top right, #000000, rgba(0,0,0,0.00), #696969) #343434;
    border-radius: 0px;
+   box-shadow: 2px 2px 15px #A9A9A9;
    box-sizing: border-box;
-   margin: 0;
 }
 .DropdownMenu2 .nav
 {
@@ -550,7 +550,7 @@ body
 #LayoutGrid3
 {
    box-sizing: border-box;
-   padding: 50px 15px 25px 15px;
+   padding: 140px 15px 25px 15px;
    margin-right: auto;
    margin-left: auto;
    max-width: 976px;
@@ -3579,10 +3579,11 @@ body
 }
 #PageHeader1
 {
-   display: block;
-   position: relative;
+   position: fixed;
    text-align: left;
-   width: 100%;
+   left: 0;
+   top: 0;
+   right: 0;
    height: 100px;
    z-index: 7777;
 }
@@ -3758,11 +3759,6 @@ body
 {
    height: 100px;
    visibility: visible;
-   display: block;
-}
-#PageHeader1
-{
-   width: 100%;
 }
 #wb_DropdownMenu2
 {
@@ -3794,7 +3790,7 @@ body
 #LayoutGrid3
 {
    height: auto;
-   padding: 50px 15px 25px 15px;
+   padding: 140px 15px 25px 15px;
 }
 #LayoutGrid3 .row
 {
@@ -5304,11 +5300,6 @@ body
 {
    height: 100px;
    visibility: visible;
-   display: block;
-}
-#PageHeader1
-{
-   width: 100%;
 }
 #wb_DropdownMenu2
 {
@@ -5340,7 +5331,7 @@ body
 #LayoutGrid3
 {
    height: auto;
-   padding: 50px 15px 25px 15px;
+   padding: 140px 15px 25px 15px;
 }
 #LayoutGrid3 .row
 {
@@ -6850,11 +6841,6 @@ body
 {
    height: 100px;
    visibility: visible;
-   display: block;
-}
-#PageHeader1
-{
-   width: 100%;
 }
 #wb_DropdownMenu2
 {
@@ -6886,7 +6872,7 @@ body
 #LayoutGrid3
 {
    height: auto;
-   padding: 50px 15px 25px 15px;
+   padding: 140px 15px 25px 15px;
 }
 #LayoutGrid3 .row
 {
@@ -8396,11 +8382,6 @@ body
 {
    height: 100px;
    visibility: visible;
-   display: block;
-}
-#PageHeader1
-{
-   width: 100%;
 }
 #wb_DropdownMenu2
 {
@@ -8432,7 +8413,7 @@ body
 #LayoutGrid3
 {
    height: auto;
-   padding: 50px 15px 25px 15px;
+   padding: 140px 15px 25px 15px;
 }
 #LayoutGrid3 .row
 {
