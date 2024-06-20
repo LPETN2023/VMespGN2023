@@ -1,6 +1,6 @@
 @echo off
 
-winget upgrade --all
+winget upgrade --all --accept-package-agreements --accept-source-agreements
 
 echo.
 echo Voulez-vous egalement mettre a jour votre systeme Linux? (O/N)
