@@ -242,7 +242,15 @@ $(document).ready(function()
 <div id="LayoutGrid11">
 <div class="col-1">
 <div id="wb_Image5">
-<a href="javascript:popupwnd('./images/Capture_API_Telegram.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_API_Telegram.png" id="Image5" alt="" width="437" height="312"></a>
+<a href="javascript:popupwnd('./images/Capture_API_Telegram.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_API_Telegram.png" id="Image5" alt="" width="435" height="310"></a>
+</div>
+</div>
+<div class="col-2">
+<div id="wb_Image7">
+<a href="./images/niqyepx8t4.jpg"><img src="images/niqyepx8t4.jpg" id="Image7" alt="" width="357" height="153"></a>
+</div>
+<div id="wb_Text12">
+<span style="color:#000000;font-family:Arial;font-size:16px;"><br>Cliquez sur &quot;API development tools&quot;.<br><br>S'il vous est demandé des informations pour créer votre API, indiquez-en au hasard (inutile de renseigner la case &quot;URL&quot;)</span>
 </div>
 </div>
 </div>
@@ -267,35 +275,27 @@ $(document).ready(function()
 <div id="wb_LayoutGrid13">
 <div id="LayoutGrid13">
 <div class="col-1">
-<div id="wb_Image7">
-<a href="javascript:popupwnd('./images/Capture_parametrage_telepathy.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_parametrage_telepathy.png" id="Image7" alt="" width="357" height="255"></a>
+<div id="wb_Image10">
+<a href="./images/8k00bkjjd3.jpg"><img src="images/8k00bkjjd3.jpg" id="Image10" alt="" width="357" height="44"></a>
 </div>
 </div>
 <div class="col-2">
 <div id="wb_Text4">
-<p>Après avoir entré la commande "telepathy" dans le terminal WSL, il vous est demandé d'entrer successivement les éléments suivants : </p>
+<p>Au premier démarrage de Telepathy, il vous est demandé d'entrer certaines informations. Ces dernières seront sauvegardées. Vous n'aurez normalement pas à les modifier. </p>
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Nom d'utilisateur et numéro de téléphone </span>: Se trouvent dans les paramètres du compte Telegram
+</li>
+</ul>
 <br>
 <ul style="list-style-type:disc;">
 <li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">API ID et API Hash </span>: Ces éléments se trouvent sur le site internet "my.telegram.org", consulté précédemment
 </li>
 </ul>
 <br>
-<br>
 </div>
 <div id="wb_Image8">
 <a href="javascript:popupwnd('./images/Capture_API_site_telegram.png','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/Capture_API_site_telegram.png" id="Image8" alt="" width="512" height="93"></a>
-</div>
-<div id="wb_Text5">
-<br>
-<ul style="list-style-type:disc;">
-<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Numéro de téléphone ou "bot token"</span><span style="font-size:13px;line-height:16px;"> : </span>Il s'agit du numéro de téléphone lié à votre compte "Telegram".
-</li>
-</ul>
-<br>
-<ul style="list-style-type:disc;">
-<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Code reçu </span>: Il s'agit d'un code que vous allez recevoir en message privé sur votre compte "Telegram"
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -313,156 +313,91 @@ $(document).ready(function()
 <div class="row">
 <div class="col-1">
 <div id="wb_Text2">
-<span style="color:#000000;font-family:Arial;font-size:16px;"><br><br>Une fois le premier paramétrage effectué, lancez le programme à l'aide de la commande &quot;telepathy&quot;. <br><br>A chaque nouvelle utilisation, il vous sera demandé d'indiquer le numéro de téléphone lié à votre compte &quot;Telegram&quot;, ainsi que le nouveau code reçu en message privé, comme lors du paramétrage initial. <br><br>Ceci fait, vous pouvez commencer à lancer les commandes que vous souhaitez utiliser. </span>
+<br>
+<p>Une fois le premier paramétrage effectué, lancez le programme à l'aide de la commande "telepathy". </p>
+<br>
+<p>Plusieurs informations vous seront demandées afin de pouvoir lancer le téléchargement : </p>
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Nom du canal ou du compte à scraper </span>:
+</li>
+</ul>
+<br>
+<p>Cette information est disponible dans les paramètres du compte ou de l'utilisateur. </p>
+<br>
+<p style="color:#FF0000;"><span style="font-weight:bold;">Attention</span><span style="color:#000000;"> à bien respecter au format (https://t.me/nom_du_canal ou @nom_de_l'utilisateur)</span></p>
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Nom de sortie du fichier </span>: 
+</li>
+</ul>
+<br>
+<p>Il s'agit du nom qui sera donné au dossier créé avec les données scrapées. </p>
+<br>
+<p style="color:#FF0000;"><span style="font-weight:bold;">Attention</span><span style="color:#000000;"> à ne pas utiliser de caractères spéciaux ni d'espace.</span></p>
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Date de début </span>: (appuyer directement sur "Enter" pour utiliser la valeur par défaut)
+</li>
+</ul>
+<br>
+<p>Il s'agit de la date à partir de laquelle seront récupérées les données. </p>
+<br>
+<p>Vous n'êtes pas obligé de renseigner ce champ, qui prendra par défaut la valeur antérieure d'un an par rapport à la date du jour.</p>
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Date de fin </span>: (appuyer directement sur "Enter" pour utiliser la valeur par défaut)
+</li>
+</ul>
+<br>
+<p>Il s'agit de la date jusqu'à laquelle seront récupérées les données.&nbsp; </p>
+<br>
+<p>Vous n'êtes pas obligé de renseigner ce champ, qui prendra par défaut la date du jour.</p>
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Mot-clé </span>: (appuyer directement sur "Enter" pour ne pas en utiliser)
+</li>
+</ul>
+<br>
+<p>En cas de recherche de post présentant un terme en particulier. </p>
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Nombre maximum de messages à scraper </span>: (appuyer directement sur "Enter" pour utiliser la valeur par défaut)
+</li>
+</ul>
+<br>
+<p>Limite le nombre de messages récupérés. Permet de limiter le temps de traitement. </p>
+<br>
+<p>La valeur par défaut est de 1.000.000 messages.</p>
+<br>
+<ul style="list-style-type:disc;">
+<li style="margin:0 0 0 24px;"><span style="text-decoration:underline;">Limite de temps en secondes</span> : (appuyer directement sur "Enter" pour utiliser la valeur par défaut)
+</li>
+</ul>
+<br>
+<p>Permet de limiter le temps de traitement. </p>
+<br>
+<p>La valeur par défaut est de 21.600 secondes. </p>
+<br>
+<br>
+<p><span style="text-decoration:underline;">Par intermittence, il pourra vous être demandé de renseigner à nouveau le numéro de téléphone lié à votre compte "Telegram", ainsi que le nouveau code reçu en message privé.</span></p>
+<br>
+<br>
+<p>Une fois les données récupérées, un dossier sera créé sur le "Bureau" de votre compte "Windows". Il contiendra un document de type tableur reprenant les messages récupérés. Si celui-ci contenait un média (photo, vidéos...etc), un lien "cliquable" sera présent, permettant d'accéder à ce contenu. </p>
+<br>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div id="wb_LayoutGrid7">
-<div id="LayoutGrid7">
-<div class="col-1">
-<div id="wb_Heading5">
-<h3 id="Heading5">Récupération d'un "canal Telegram"</h3>
-</div>
-<div id="wb_Text10">
-<span style="color:#000000;font-family:Arial;font-size:16px;"><br><br>Il vous faut récupérer le nom du &quot;canal&quot;. Il s'agit de la suite alpha-numérique se trouvant après &quot;t.me/&quot;. <br><br>Dans notre exemple, il s'agit de &quot;BFMTV_FR&quot;.<br><br>Indiquez ensuite ce nom dans le champs du formulaire ci-dessous, qui va vous générer la commande à entrer dans votre terminal &quot;WSL&quot;. <br><br>Si la case &quot;<u>extraire les média ?</u>&quot; est cochée, l'ensemble des médias du &quot;canal&quot; seront téléchargés. Ceci peut considérablement augmenter le temps de traitement. Il vous faudra également faire attention à la légalité des médias qui seront alors stockés sur votre système. <br><br>Le résultat de l'extraction sera placé dans un dossier, sur le bureau de votre machine virtuelle. </span>
-</div>
-</div>
-<div class="col-2">
-<div id="wb_Image6">
-<a href="javascript:popupwnd('./images/3mm2jcv09j.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/3mm2jcv09j.jpg" id="Image6" alt="" width="286" height="168"></a>
-</div>
-</div>
-</div>
-</div>
-<div id="wb_LayoutGrid17">
-<div id="LayoutGrid17">
-<div class="col-1">
-<div id="wb_Heading6">
-<h3 id="Heading6">Récupération d'informations sur un utilisateur</h3>
-</div>
-<div id="wb_Text11">
-<span style="color:#000000;font-family:Arial;font-size:16px;"><br>Vous pouvez également récupérer des informations sur un utilisateur à l'aide de son &quot;ID&quot; ou du nom de compte au format &quot;@nom_de_compte&quot;. Pour connaitre ce dernier, il vous faudra préalablement ajouté l'utilisateur en tant qu'ami, puis consulter son profil. </span>
-</div>
-</div>
-<div class="col-2">
-<div id="wb_Image9">
-<a href="javascript:popupwnd('./images/vgwupsveam.jpg','no','no','no','no','no','no','','','800','800')" target="_self"><img src="images/vgwupsveam.jpg" id="Image9" alt="" width="177" height="183"></a>
-</div>
-</div>
-</div>
-</div>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generate Telepathy Phrases</title>
-  </head>
-<body>
-
-  <h1>Récupération d'un "canal" Telegram</h1>
-
-  <form>
-    <label for="telepathyChatInput">Entrez le nom du "canal" :</label>
-    <input type="text" id="telepathyChatInput" placeholder="(Format : @canal)" onkeydown="if(event.key==='Enter'){generateAndCopyTelepathy('chanel')}">
-
-    <label for="addSuffixChat">Extraire les médias?</label>
-    <input type="checkbox" id="addSuffixChat">
-    
-    <button type="button" onclick="generateAndCopyTelepathy('chanel')">Générer</button>
-
-    <span class="copyButton" onclick="copyToClipboardTelepathy('chanel')">
-      <span>📋</span>
-    </span>
-  </form>
-
-  <p id="resultTelepathyChat"></p>
-  <br>
-  <br>
-  <h1>Utilisateur</h1>
-
-  <form>
-    <label for="telepathyUserInput">Entrez le nom d'utilisateur :</label>
-    <input type="text" id="telepathyUserInput" placeholder="(Format : @utilisateur)" onkeydown="if(event.key==='Enter'){generateAndCopyTelepathy('user')}">
-
-    <button type="button" onclick="generateAndCopyTelepathy('user')">Générer</button>
-
-    <span class="copyButton" onclick="copyToClipboardTelepathy('user')">
-      <span>📋</span>
-    </span>
-  </form>
-
-  <p id="resultTelepathyUser"></p>
-
-  <script>
-    function generateAndCopyTelepathy(type) {
-      generatePhraseTelepathy(type);
-      copyToClipboardTelepathy(type);
-    }
-
-    function generatePhraseTelepathy(type) {
-      var telepathyInput;
-      var resultElement;
-
-      if (type === 'chanel') {
-        telepathyInput = document.getElementById('telepathyChatInput');
-        var addSuffixCheckbox = document.getElementById('addSuffixChat');
-        resultElement = document.getElementById('resultTelepathyChat');
-        
-        var telepathy = telepathyInput.value;
-        var addSuffix = addSuffixCheckbox.checked;
-
-        if (telepathy) {
-          var phrase = 'telepathy -t ' + telepathy + ' -c -f';
-          
-          if (addSuffix) {
-            phrase += ' -m';
-          }
-
-          phrase += '; cp -r ./telepathy_files/' + telepathy + ' "$(wslpath "$(powershell.exe \'[System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::DesktopDirectory)\'")" | tr -d \'\\r\')"; rm -R ./telepathy_files/' + telepathy;
-          resultElement.innerHTML = '<strong>' + phrase + '</strong>';
-        } else {
-          resultElement.innerHTML = '<strong>Veuillez entrer quelque chose pour Telepathy ' + type + '.</strong>';
-        }
-      } else if (type === 'user') {
-        telepathyInput = document.getElementById('telepathyUserInput');
-        resultElement = document.getElementById('resultTelepathyUser');
-        
-        var telepathyUser = telepathyInput.value;
-
-        if (telepathyUser) {
-          var userPhrase = 'telepathy -t ' + telepathyUser + ' -u';
-          resultElement.innerHTML = '<strong>' + userPhrase + '</strong>';
-        } else {
-          resultElement.innerHTML = '<strong>Veuillez entrer quelque chose pour Telepathy ' + type + '.</strong>';
-        }
-      }
-    }
-
-    function copyToClipboardTelepathy(type) {
-      var resultElement;
-
-      if (type === 'chanel') {
-        resultElement = document.getElementById('resultTelepathyChat');
-      } else if (type === 'user') {
-        resultElement = document.getElementById('resultTelepathyUser');
-      }
-
-      var textToCopy = resultElement.textContent;
-
-      var tempInput = document.createElement('input');
-      tempInput.value = textToCopy;
-      document.body.appendChild(tempInput);
-
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-    }
-  </script>
-
-</body>
-</html>
-</body>
+<!DOCTYPE html> 
+<html lang="fr"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Copier la commande</title> 
+ </head> <body>
+<button onclick="copyTelepathy()">Copier la commande</button>
+<p id="copyStatus"></p> 
+<script> function copyTelepathy() { var textToCopy = "telepathy"; navigator.clipboard.writeText(textToCopy).then(function() { document.getElementById('copyStatus').textContent = 'Copié !'; setTimeout(function() { document.getElementById('copyStatus').textContent = ''; }, 2000); }, function(err) { console.error('Erreur lors de la copie : ', err); document.getElementById('copyStatus').textContent = 'Erreur de copie'; }); } </script> </body> </html></body>
 </html>
