@@ -1,0 +1,10 @@
+# =============================================================================
+#  Programmes à retirer du démarrage automatique de Windows
+#  (nom de la valeur dans HKCU\Software\Microsoft\Windows\CurrentVersion\Run)
+#  Vérifié à chaque mise à jour : utile pour Discord, qui se réinscrit
+#  au démarrage après son premier lancement.
+# =============================================================================
+
+Discord
+OneDrive
+Skype for Desktop

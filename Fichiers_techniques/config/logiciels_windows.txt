@@ -1,0 +1,48 @@
+# =============================================================================
+#  Logiciels Windows installés sur chaque VM (via winget)
+#  - Un identifiant par ligne ; tout ce qui suit '#' est un commentaire.
+#  - Trouver un identifiant :  winget search <nom>
+#  - Ajouter une ligne ici suffit : à la prochaine mise à jour, toutes les VM
+#    l'installeront. Les logiciels déjà présents sont ignorés.
+#  - Pour RETIRER un logiciel des VM : supprimez sa ligne ici ET ajoutez-le
+#    dans logiciels_a_desinstaller.txt.
+# =============================================================================
+
+# --- Système
+Microsoft.WSL                            # Sous-système Linux (remplace l'ID Store 9P9TQF7MRM4R)
+7zip.7zip
+Notepad++.Notepad++
+TheDocumentFoundation.LibreOffice
+
+# --- Navigateurs
+Mozilla.Firefox
+Google.Chrome
+Brave.Brave
+TorProject.TorBrowser
+
+# --- Messageries
+Discord.Discord
+9NKSQGP7F2NH                             # WhatsApp (Microsoft Store)
+OpenWhisperSystems.Signal
+Telegram.TelegramDesktop
+
+# --- Sécurité / confidentialité
+GnuPG.Gpg4win
+IDRIX.VeraCrypt
+ProtonTechnologies.ProtonVPN
+
+# --- Analyse
+WiresharkFoundation.Wireshark
+BinaryFortress.HashTools
+OliverBetz.ExifTool
+XavierRoche.HTTrack
+
+# --- Multimédia
+OBSProject.OBSStudio
+VideoLAN.VLC
+XnSoft.XnViewMP
+SplitCam.SplitCam
+
+# --- À identifier (ID Microsoft Store) : lancer "winget show 9WZDNCRFJFCV"
+#     puis remplacer ce commentaire par le nom du logiciel.
+9WZDNCRFJFCV

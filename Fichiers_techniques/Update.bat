@@ -1,27 +1,7 @@
 @echo off
-
-winget upgrade --all --accept-package-agreements --accept-source-agreements
-
-echo.
-echo Voulez-vous egalement mettre a jour votre systeme Linux? (O/N)
-choice /c ON /n /m "Votre choix:"
-
-if errorlevel 2 goto :No
-if errorlevel 1 goto :Yes
-
-:Yes
-@echo off
-set /p password=Entrez votre mot de passe sudo :
-set "commands1=apt update"
-set "commands2=apt -y upgrade"
-
-wsl echo %password% | wsl sudo -S %commands1%
-wsl echo %password% | wsl sudo -S %commands2%
-
-pause
-
-goto :EOF
-
-:No
-echo Votre système principal est à jour.
-goto :EOF
+rem ==========================================================================
+rem  COMPATIBILITE - ne pas renommer ni supprimer.
+rem  Appele par "Mise a jour du systeme.bat" (fichier d'origine, inchange).
+rem  Toute la logique de mise a jour est dans ESP.ps1.
+rem ==========================================================================
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0ESP.ps1" -Mode MiseAJour

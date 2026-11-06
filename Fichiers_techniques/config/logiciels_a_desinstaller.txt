@@ -1,0 +1,6 @@
+# =============================================================================
+#  Logiciels à DÉSINSTALLER des VM (identifiants winget, un par ligne)
+#  S'ils sont présents, ils sont retirés à chaque mise à jour.
+# =============================================================================
+
+Microsoft.Skype                          # Service arrêté par Microsoft en mai 2025

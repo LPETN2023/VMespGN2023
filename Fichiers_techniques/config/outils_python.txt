@@ -1,0 +1,10 @@
+# =============================================================================
+#  Outils Python installés dans WSL avec pipx (nom du paquet sur PyPI)
+#  Chaque outil a son propre environnement isolé : plus de conflits entre
+#  outils, et plus d'erreur "externally-managed-environment" d'Ubuntu 24.04.
+#  Les commandes sont disponibles pour tous les comptes (/usr/local/bin).
+# =============================================================================
+
+holehe
+ignorant
+sherlock-project                         # commande : sherlock
