@@ -6,6 +6,10 @@
 #    l'installeront. Les logiciels déjà présents sont ignorés.
 #  - Pour RETIRER un logiciel des VM : supprimez sa ligne ici ET ajoutez-le
 #    dans logiciels_a_desinstaller.txt.
+#  - "script:Nom" = logiciel que winget installe mal : il est installé par
+#    le script Fichiers_techniques\installateurs\Nom.ps1.
+#  - Pour qu'il apparaisse dans le dossier "Logiciels" du Bureau, ajoutez-le
+#    aussi dans raccourcis_logiciels.txt.
 # =============================================================================
 
 # --- Système
@@ -18,7 +22,7 @@ TheDocumentFoundation.LibreOffice
 Mozilla.Firefox
 Google.Chrome
 Brave.Brave
-TorProject.TorBrowser
+script:TorBrowser                        # installé depuis torproject.org (voir installateurs\TorBrowser.ps1)
 
 # --- Messageries
 Discord.Discord
@@ -29,7 +33,7 @@ Telegram.TelegramDesktop
 # --- Sécurité / confidentialité
 GnuPG.Gpg4win
 IDRIX.VeraCrypt
-ProtonTechnologies.ProtonVPN
+Proton.ProtonVPN                         # nouvel ID (l'ancien, ProtonTechnologies.ProtonVPN, est bloqué en version 2.2 de 2023)
 
 # --- Analyse
 WiresharkFoundation.Wireshark

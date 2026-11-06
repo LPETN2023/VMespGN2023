@@ -1,5 +1,13 @@
 # Historique des versions
 
+## 2.1.0
+- Correction : les migrations échouaient avec « Impossible d'appeler une méthode dans une expression Null ».
+- Proton VPN : nouvel identifiant winget (`Proton.ProtonVPN`).
+- Tor Browser : installé depuis torproject.org (`installateurs/TorBrowser.ps1`) au lieu de winget.
+- Mise à jour : la mise à jour d'Ubuntu est proposée (O/N) au début.
+- Raccourcis « Mise à jour du système » et « Installation de logiciels » sur le Bureau.
+- Nouveau dossier « Logiciels » sur le Bureau (`config/raccourcis_logiciels.txt`).
+
 ## 2.0.0
 - Nouveau moteur unique `Fichiers_techniques/ESP.ps1` pour l'installation et la mise à jour.
 - Listes de logiciels et d'outils dans `Fichiers_techniques/config/` : appliquées à chaque mise à jour.

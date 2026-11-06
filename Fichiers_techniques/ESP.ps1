@@ -81,6 +81,7 @@ function Read-Etat {
         reprise            = ''
         redemarrages       = 0
         distribution       = ''
+        maj_ubuntu         = $false
     }
     if (Test-Path $FichierEtat) {
         try {
@@ -103,12 +104,21 @@ function ConvertTo-TexteClair([Security.SecureString]$Secure) {
     finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr) }
 }
 
-function New-Raccourci([string]$Lnk, [string]$Cible) {
+function New-Raccourci([string]$Lnk, [string]$Cible, [string]$Arguments = '') {
     $shell = New-Object -ComObject WScript.Shell
     $r = $shell.CreateShortcut($Lnk)
     $r.TargetPath = $Cible
-    $r.WorkingDirectory = Split-Path $Cible -Parent
+    if ($Arguments) { $r.Arguments = $Arguments }
+    else { $r.WorkingDirectory = Split-Path $Cible -Parent }
     $r.Save()
+}
+
+function Read-OuiNon([string]$Question) {
+    while ($true) {
+        $r = ("$(Read-Host "$Question (O/N)")").Trim().ToUpper()
+        if ($r -eq 'O' -or $r -eq 'OUI') { return $true }
+        if ($r -eq 'N' -or $r -eq 'NON') { return $false }
+    }
 }
 
 # =============================================================== GIT
@@ -170,6 +180,17 @@ function Set-ParametresWindows {
         # Le dossier ESP n'est pas visible sur le Bureau (Bureau redirigé par OneDrive)
         New-Raccourci (Join-Path $bureau 'ESP.lnk') $Racine
     }
+
+    # Lanceurs de la solution (cherchés par motif : le nom exact peut varier)
+    $lanceurs = @(
+        @{ Motif = 'Mise*jour*.bat';              Nom = 'Mise à jour du système.lnk' },
+        @{ Motif = 'Installation*logiciels*.bat'; Nom = 'Installation de logiciels.lnk' }
+    )
+    foreach ($l in $lanceurs) {
+        $bat = Get-ChildItem -Path $Racine -Filter $l.Motif -File -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($bat) { New-Raccourci (Join-Path $bureau $l.Nom) $bat.FullName }
+        else { Write-Alerte "Lanceur introuvable à la racine du dossier ESP : $($l.Motif)" }
+    }
     Write-Ok 'Raccourcis du Bureau à jour.'
 }
 
@@ -202,12 +223,78 @@ function Update-LogicielsWindows {
     }
 
     foreach ($id in Read-Liste 'logiciels_windows.txt') {
+        if ($id -like 'script:*') { Invoke-InstallateurSpecial $id.Substring(7).Trim(); continue }
         if (Test-WingetInstalle $id) { Write-Ok "$id déjà présent."; continue }
         Write-Info "Installation de $id..."
         & winget.exe install --id $id @options | Out-Host
         if ($succes -contains $LASTEXITCODE) { Write-Ok "$id installé." }
         else { Write-Alerte ("Installation de {0} échouée (code 0x{1:X8})." -f $id, $LASTEXITCODE) }
     }
+}
+
+function Invoke-InstallateurSpecial([string]$Nom) {
+    # Logiciels que winget installe mal : script dédié dans installateurs\<Nom>.ps1
+    $fichier = Join-Path $Tech "installateurs\$Nom.ps1"
+    if (-not (Test-Path $fichier)) { Write-Alerte "Installateur introuvable : installateurs\$Nom.ps1"; return }
+    try {
+        $ErrorActionPreference = 'Stop'
+        . $fichier
+    } catch {
+        Write-Alerte "Installation de $Nom échouée : $($_.Exception.Message)"
+    } finally {
+        $ErrorActionPreference = 'Continue'
+    }
+}
+
+function Update-DossierLogiciels {
+    Write-Etape 'Dossier "Logiciels" du Bureau'
+    $bureau  = [Environment]::GetFolderPath('Desktop')
+    $public  = [Environment]::GetFolderPath('CommonDesktopDirectory')
+    $dossier = Join-Path $bureau 'Logiciels'
+    New-Item -ItemType Directory -Force -Path $dossier | Out-Null
+
+    $menus = @("$env:ProgramData\Microsoft\Windows\Start Menu\Programs",
+               "$env:APPDATA\Microsoft\Windows\Start Menu\Programs")
+    $exclus = 'uninstall|d[ée]sinstall|readme|lisez|website|site web|help|aide|manual|documentation|license|licence'
+    $lnkMenu = @(Get-ChildItem -Path $menus -Recurse -Filter '*.lnk' -ErrorAction SilentlyContinue |
+        Where-Object { $_.BaseName -notmatch $exclus })
+    $applis = $null
+    $faits = 0
+    $absents = @()
+
+    foreach ($ligne in Read-Liste 'raccourcis_logiciels.txt') {
+        $morceaux = $ligne -split '=', 2
+        $nom = $morceaux[0].Trim()
+        $recherches = @($nom)
+        if ($morceaux.Count -eq 2) { $recherches = @($morceaux[1] -split '\|' | ForEach-Object { $_.Trim() } | Where-Object { $_ }) }
+        $lnk = Join-Path $dossier "$nom.lnk"
+        $trouve = $false
+
+        foreach ($r in $recherches) {
+            if ($r -match '\\') {
+                # Chemin direct vers un programme
+                $cible = [Environment]::ExpandEnvironmentVariables($r)
+                if (Test-Path $cible) { New-Raccourci $lnk $cible; $trouve = $true; break }
+                continue
+            }
+            # Raccourci du menu Démarrer
+            $m = $lnkMenu | Where-Object { $_.BaseName -like $r } | Sort-Object { $_.BaseName.Length } | Select-Object -First 1
+            if ($m) {
+                Copy-Item -Path $m.FullName -Destination $lnk -Force
+                # Rangement : on retire le doublon déposé sur le Bureau par l'installeur
+                Get-ChildItem -Path $bureau, $public -Filter '*.lnk' -ErrorAction SilentlyContinue |
+                    Where-Object { $_.BaseName -like $r } | Remove-Item -Force -ErrorAction SilentlyContinue
+                $trouve = $true; break
+            }
+            # Applications du Microsoft Store (WhatsApp...)
+            if ($null -eq $applis) { $applis = @(Get-StartApps -ErrorAction SilentlyContinue) }
+            $a = $applis | Where-Object { $_.Name -like $r } | Select-Object -First 1
+            if ($a) { New-Raccourci $lnk "$env:WINDIR\explorer.exe" "shell:AppsFolder\$($a.AppID)"; $trouve = $true; break }
+        }
+        if ($trouve) { $faits++ } else { $absents += $nom }
+    }
+    Write-Ok "$faits raccourci(s) dans le dossier Logiciels."
+    if ($absents.Count -gt 0) { Write-Info "Non trouvés (logiciel absent ou nom différent) : $($absents -join ', ')" }
 }
 
 function Update-TousLesLogiciels {
@@ -372,7 +459,9 @@ function Initialize-UtilisateurLinux {
 }
 
 function Update-OutilsLinux([bool]$AvecMiseAJour) {
+    # Sans mise à jour d'Ubuntu, on installe quand même les outils ajoutés aux listes
     Write-Etape 'Outils Linux'
+    if (-not $AvecMiseAJour) { Write-Info 'Mise à jour du système Ubuntu : non demandée.' }
     if (-not $script:Distro) { Write-Alerte 'Pas de distribution Linux : étape ignorée.'; return }
     $action = 'outils'
     if ($AvecMiseAJour) { $action = 'maj' }
@@ -395,7 +484,7 @@ function Invoke-Migrations {
         Write-Info "Migration $($m.Name)..."
         try {
             $ErrorActionPreference = 'Stop'
-            & $m.FullName
+            . $m.FullName      # "." et non "&" : la migration voit les fonctions et variables du moteur
             $ErrorActionPreference = 'Continue'
             $script:Etat.derniere_migration = $num
             Save-Etat
@@ -404,6 +493,7 @@ function Invoke-Migrations {
         } catch {
             $ErrorActionPreference = 'Continue'
             Write-Alerte "Migration $($m.Name) en échec : $($_.Exception.Message). Elle sera retentée à la prochaine mise à jour."
+            $faites = -1
             break   # on ne saute jamais une migration
         }
         if ($script:RedemarrageDemande) { break }
@@ -521,11 +611,25 @@ Write-Host '================================================================' -F
 Set-GitConfiance
 $script:Distro = Find-Distribution
 
-# Seule question de l'installation : posée tout de suite, pendant que l'utilisateur est là
+# Les questions sont posées tout de suite, pendant que l'utilisateur est là ;
+# la suite peut ensuite se dérouler sans surveillance.
 if (-not $script:Distro -and -not (Get-MotDePasseStocke)) { Request-MotDePasseLinux }
+
+$script:MajUbuntu = $false
+if ($ModeEffectif -eq 'MiseAJour') {
+    if ($Mode -eq 'Reprise') {
+        $script:MajUbuntu = [bool]$script:Etat.maj_ubuntu
+    } elseif ($script:Distro) {
+        Write-Host ''
+        $script:MajUbuntu = Read-OuiNon 'Voulez-vous aussi mettre à jour le système Ubuntu (WSL) ?'
+        $script:Etat.maj_ubuntu = $script:MajUbuntu
+        Save-Etat
+    }
+}
 
 Set-ParametresWindows
 Update-LogicielsWindows
+Update-DossierLogiciels
 
 if (Enable-FonctionnaliteWSL) { Restart-EtReprendre $ModeEffectif }
 
@@ -538,7 +642,7 @@ if ($script:Distro) { $script:Etat.distribution = $script:Distro; Save-Etat }
 Invoke-Migrations
 if ($script:RedemarrageDemande) { Restart-EtReprendre $ModeEffectif }
 
-Update-OutilsLinux ($ModeEffectif -eq 'MiseAJour')
+Update-OutilsLinux $script:MajUbuntu
 
 if ($ModeEffectif -eq 'MiseAJour') { Update-TousLesLogiciels }
 

@@ -1,0 +1,48 @@
+# =============================================================================
+#  Raccourcis rangés dans le dossier "Logiciels" du Bureau
+#
+#  Format :   Nom du raccourci = recherche
+#  - recherche = nom du raccourci dans le menu Démarrer ; * = n'importe quel texte
+#    (sert aussi pour les applications du Microsoft Store, comme WhatsApp) ;
+#  - ou chemin complet d'un programme (variables %...% acceptées) ;
+#  - plusieurs recherches possibles, séparées par | (la première trouvée gagne).
+#  Sans "= recherche", le nom sert de recherche.
+#
+#  Le raccourci que l'installeur a éventuellement posé sur le Bureau est retiré
+#  (il est rangé dans le dossier Logiciels à la place).
+#  Un logiciel non trouvé est simplement signalé : rien ne bloque.
+# =============================================================================
+
+# --- Navigateurs
+Firefox          = Firefox
+Google Chrome    = Google Chrome
+Brave            = Brave
+Tor Browser      = %LOCALAPPDATA%\Tor Browser\Browser\firefox.exe | *Tor Browser*
+
+# --- Messageries
+Discord          = Discord
+WhatsApp         = WhatsApp*
+Signal           = Signal
+Telegram         = Telegram*
+
+# --- Sécurité / confidentialité
+Proton VPN       = Proton VPN*
+Kleopatra        = Kleopatra*
+VeraCrypt        = VeraCrypt
+
+# --- Analyse
+Wireshark        = Wireshark
+HashTools        = HashTools*
+HTTrack          = WinHTTrack*
+
+# --- Multimédia
+OBS Studio       = OBS Studio*
+VLC              = VLC media player
+XnView MP        = XnView*
+SplitCam         = SplitCam*
+
+# --- Bureautique / outils
+LibreOffice      = LibreOffice
+Notepad++        = Notepad++
+7-Zip            = 7-Zip File Manager
+Ubuntu (WSL)     = Ubuntu*
