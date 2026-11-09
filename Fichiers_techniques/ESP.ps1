@@ -194,8 +194,15 @@ function Set-ParametresWindows {
     Write-Ok 'Raccourcis du Bureau à jour.'
 }
 
+function Get-SourceWinget([string]$Id) {
+    # Les identifiants du Microsoft Store sont des codes de 12 caractères (ex. 9NKSQGP7F2NH).
+    # Préciser la source évite que winget s'arrête quand l'autre source est injoignable.
+    if ($Id -cmatch '^[0-9A-Z]{12}$') { return 'msstore' }
+    return 'winget'
+}
+
 function Test-WingetInstalle([string]$Id) {
-    $null = & winget.exe list --id $Id -e --accept-source-agreements --disable-interactivity
+    $null = & winget.exe list --id $Id -e --source (Get-SourceWinget $Id) --accept-source-agreements --disable-interactivity
     return ($LASTEXITCODE -eq 0)
 }
 
@@ -216,7 +223,7 @@ function Update-LogicielsWindows {
     foreach ($id in Read-Liste 'logiciels_a_desinstaller.txt') {
         if (Test-WingetInstalle $id) {
             Write-Info "Désinstallation de $id..."
-            & winget.exe uninstall --id $id -e -h --accept-source-agreements --disable-interactivity | Out-Host
+            & winget.exe uninstall --id $id -e -h --source (Get-SourceWinget $id) --accept-source-agreements --disable-interactivity | Out-Host
             if ($LASTEXITCODE -eq 0) { Write-Ok "$id désinstallé." }
             else { Write-Alerte "Désinstallation de $id impossible (code $LASTEXITCODE)." }
         }
@@ -226,7 +233,7 @@ function Update-LogicielsWindows {
         if ($id -like 'script:*') { Invoke-InstallateurSpecial $id.Substring(7).Trim(); continue }
         if (Test-WingetInstalle $id) { Write-Ok "$id déjà présent."; continue }
         Write-Info "Installation de $id..."
-        & winget.exe install --id $id @options | Out-Host
+        & winget.exe install --id $id --source (Get-SourceWinget $id) @options | Out-Host
         if ($succes -contains $LASTEXITCODE) { Write-Ok "$id installé." }
         else { Write-Alerte ("Installation de {0} échouée (code 0x{1:X8})." -f $id, $LASTEXITCODE) }
     }

@@ -16,7 +16,7 @@
 $cleOffice = 'HKLM:\SOFTWARE\Microsoft\Office\ClickToRun\Configuration'
 
 function Lock-OfficeDansWinget {
-    $null = & winget.exe pin add --id Microsoft.Office -e --accept-source-agreements --disable-interactivity
+    $null = & winget.exe pin add --id Microsoft.Office -e --source winget --accept-source-agreements --disable-interactivity
 }
 
 $present = Get-ItemProperty -Path $cleOffice -ErrorAction SilentlyContinue
@@ -34,7 +34,7 @@ $xml = Join-Path $DossierTmp 'office.xml'
 Copy-Item -Path $xmlSource -Destination $xml -Force
 
 Write-Info 'Installation de Microsoft Office (plusieurs Go à télécharger, cela peut être long)...'
-& winget.exe install --id Microsoft.Office -e -h --accept-package-agreements --accept-source-agreements `
+& winget.exe install --id Microsoft.Office -e -h --source winget --accept-package-agreements --accept-source-agreements `
     --disable-interactivity --override "/configure $xml" | Out-Host
 $codeOffice = $LASTEXITCODE
 

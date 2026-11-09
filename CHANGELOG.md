@@ -1,5 +1,8 @@
 # Historique des versions
 
+## 2.4.1
+- Correction : la source winget (winget ou msstore) est désormais précisée pour chaque logiciel. Une boutique Microsoft injoignable ne bloque plus l'installation d'Office ni des autres logiciels.
+
 ## 2.4.0
 - Installation de Microsoft Office (Microsoft 365 Apps, en français, 64 bits) via winget, avec la configuration `config/office.xml`.
 - Raccourcis Word, Excel, PowerPoint, Outlook et OneNote dans le dossier « Logiciels ».
