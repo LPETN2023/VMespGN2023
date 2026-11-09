@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  =============================================================================
+  Configuration de l'installation de Microsoft Office
+  (Office Deployment Tool, utilisé par installateurs\MicrosoftOffice.ps1)
+
+  Édition installée par défaut : Microsoft 365 Apps (O365ProPlusRetail).
+  L'installation est gratuite ; l'utilisateur active Office en se connectant
+  avec un compte Microsoft 365 au premier lancement de Word, Excel...
+
+  Pour une autre licence, remplacez la ligne <Add ...> et <Product ...> :
+    - Office LTSC 2024 (licence en volume / KMS de l'organisation) :
+        <Add OfficeClientEdition="64" Channel="PerpetualVL2024">
+          <Product ID="ProPlus2024Volume">
+    - Office Famille et Petite Entreprise 2024 (licence achetée) :
+        <Add OfficeClientEdition="64" Channel="Current">
+          <Product ID="HomeBusiness2024Retail">
+
+  Applications retirées : supprimez une ligne <ExcludeApp> pour l'installer.
+  Valeurs possibles : Access, Excel, OneNote, Outlook, PowerPoint, Word,
+  Teams, OneDrive, Groove (ancien OneDrive), Lync (Skype Entreprise), Bing.
+
+  Ce fichier ne sert qu'à la PREMIÈRE installation d'Office sur une machine.
+  Office se met ensuite à jour tout seul (<Updates Enabled="TRUE" />).
+  =============================================================================
+-->
+<Configuration>
+  <Add OfficeClientEdition="64" Channel="Current">
+    <Product ID="O365ProPlusRetail">
+      <Language ID="fr-fr" />
+      <ExcludeApp ID="Teams" />
+      <ExcludeApp ID="OneDrive" />
+      <ExcludeApp ID="Groove" />
+      <ExcludeApp ID="Lync" />
+      <ExcludeApp ID="Bing" />
+    </Product>
+  </Add>
+  <Updates Enabled="TRUE" />
+  <RemoveMSI />
+  <Display Level="None" AcceptEULA="TRUE" />
+  <Property Name="AUTOACTIVATE" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+</Configuration>

@@ -17,6 +17,7 @@ Microsoft.WSL                            # Sous-système Linux (remplace l'ID St
 7zip.7zip
 Notepad++.Notepad++
 TheDocumentFoundation.LibreOffice
+script:MicrosoftOffice                   # Word, Excel, PowerPoint... (réglages : config\office.xml)
 
 # --- Navigateurs
 Mozilla.Firefox

@@ -1,5 +1,16 @@
 # Historique des versions
 
+## 2.4.0
+- Installation de Microsoft Office (Microsoft 365 Apps, en français, 64 bits) via winget, avec la configuration `config/office.xml`.
+- Raccourcis Word, Excel, PowerPoint, Outlook et OneNote dans le dossier « Logiciels ».
+
+## 2.3.0
+- La vérification de l'activation de Windows a aussi lieu au début de l'installation initiale.
+
+## 2.2.0
+- Mise à jour : vérification de l'activation de Windows en tout premier. Si Windows n'est pas activé
+  définitivement (essai, évaluation, non activé), la commande de `Fichiers_techniques/activation/activation_windows.ps1` est exécutée.
+
 ## 2.1.0
 - Correction : les migrations échouaient avec « Impossible d'appeler une méthode dans une expression Null ».
 - Proton VPN : nouvel identifiant winget (`Proton.ProtonVPN`).

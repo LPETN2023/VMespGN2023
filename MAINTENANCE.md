@@ -16,8 +16,10 @@ Une VM restée plusieurs versions en arrière rattrape donc tout en une seule mi
 | Ajouter un logiciel Windows | Ajouter son ID dans `config/logiciels_windows.txt` (`winget search <nom>` pour le trouver), et une ligne dans `config/raccourcis_logiciels.txt` pour qu'il apparaisse dans le dossier « Logiciels » du Bureau |
 | Installer un logiciel que winget gère mal | Écrire `installateurs/Nom.ps1` (modèle : `TorBrowser.ps1`) et mettre `script:Nom` dans `logiciels_windows.txt` |
 | Retirer un logiciel Windows | Supprimer sa ligne de `logiciels_windows.txt` **et** l'ajouter dans `config/logiciels_a_desinstaller.txt` |
+| Changer l'édition, la langue ou les applications de Microsoft Office | Modifier `config/office.xml` (explications dans le fichier). Ne s'applique qu'aux machines où Office n'est pas encore installé |
 | Ajouter un paquet Ubuntu | Une ligne dans `config/paquets_apt.txt` |
 | Ajouter un outil Python (OSINT…) | Le nom PyPI dans `config/outils_python.txt` |
+| Activer Windows automatiquement (installation et mises à jour) | Coller la commande dans `activation/activation_windows.ps1` (sans `#` au début). Attention : le dépôt est public, une clé de produit y serait visible |
 | Empêcher un programme de démarrer avec Windows | Une ligne dans `config/demarrage_a_retirer.txt` |
 | Faire un changement ponctuel (réglage, nettoyage, déplacement de fichier…) | Créer une **migration** (voir plus bas) |
 

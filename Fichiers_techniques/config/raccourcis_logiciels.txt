@@ -43,6 +43,11 @@ SplitCam         = SplitCam*
 
 # --- Bureautique / outils
 LibreOffice      = LibreOffice
+Word             = Word
+Excel            = Excel
+PowerPoint       = PowerPoint
+Outlook          = Outlook (classic) | Outlook
+OneNote          = OneNote
 Notepad++        = Notepad++
 7-Zip            = 7-Zip File Manager
 Ubuntu (WSL)     = Ubuntu*
