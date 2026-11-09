@@ -40,13 +40,13 @@ Proton.ProtonVPN                         # nouvel ID (l'ancien, ProtonTechnologi
 WiresharkFoundation.Wireshark
 BinaryFortress.HashTools
 OliverBetz.ExifTool
-XavierRoche.HTTrack
+script:HTTrack                           # installé depuis httrack.com (paquet winget défectueux)
 
 # --- Multimédia
 OBSProject.OBSStudio
 VideoLAN.VLC
 XnSoft.XnViewMP
-SplitCam.SplitCam
+script:SplitCam                          # installé depuis splitcam.com (retiré de winget)
 
 # --- À identifier (ID Microsoft Store) : lancer "winget show 9WZDNCRFJFCV"
 #     puis remplacer ce commentaire par le nom du logiciel.

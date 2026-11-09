@@ -6,6 +6,9 @@
   (un seul redémarrage). Si WSL demande malgré tout un redémarrage, le script redémarre et réessaie tout seul.
 - Correction : la migration 0001 échouait sur une machine sans Linux ; elle ne fait plus rien côté Linux dans ce cas.
 - Correction : fausse erreur « stratégie d'exécution remplacée » lors de la première installation.
+- HTTrack est installé depuis httrack.com (le paquet winget est défectueux : erreur 0x8A150011) et passe à la
+  dernière version. Il est épinglé dans winget pour que la mise à jour générale ne bute plus dessus.
+- SplitCam est installé depuis splitcam.com (le paquet a été retiré de winget : erreur 0x8A150014).
 
 ## 2.4.4
 - Correction : la mise à jour de Windows Terminal fermait la fenêtre du script et interrompait la mise à jour générale.

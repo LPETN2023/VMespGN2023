@@ -249,6 +249,19 @@ function Update-LogicielsWindows {
     }
 }
 
+function Test-LogicielInstalle([string]$Motif) {
+    # Cherche un logiciel dans la liste "Applications installées" de Windows
+    # (machine 64/32 bits et utilisateur courant). $Motif accepte les jokers : 'SplitCam*'
+    $cles = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*',
+            'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*',
+            'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*'
+    foreach ($c in $cles) {
+        if (Get-ItemProperty -Path $c -ErrorAction SilentlyContinue |
+            Where-Object { $_.DisplayName -like $Motif }) { return $true }
+    }
+    return $false
+}
+
 function Invoke-InstallateurSpecial([string]$Nom) {
     # Logiciels que winget installe mal : script dédié dans installateurs\<Nom>.ps1
     $fichier = Join-Path $Tech "installateurs\$Nom.ps1"
