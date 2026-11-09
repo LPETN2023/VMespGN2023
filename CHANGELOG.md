@@ -1,5 +1,12 @@
 # Historique des versions
 
+## 2.4.5
+- Correction (VM neuve) : Ubuntu ne s'installait pas après le premier redémarrage, car `wsl --install` exigeait
+  en plus la fonctionnalité « Plateforme de machine virtuelle ». Elle est maintenant activée en même temps que WSL
+  (un seul redémarrage). Si WSL demande malgré tout un redémarrage, le script redémarre et réessaie tout seul.
+- Correction : la migration 0001 échouait sur une machine sans Linux ; elle ne fait plus rien côté Linux dans ce cas.
+- Correction : fausse erreur « stratégie d'exécution remplacée » lors de la première installation.
+
 ## 2.4.4
 - Correction : la mise à jour de Windows Terminal fermait la fenêtre du script et interrompait la mise à jour générale.
   Windows Terminal et App Installer (winget) sont désormais mis à jour en arrière-plan, après la fermeture de la fenêtre

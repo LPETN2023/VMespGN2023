@@ -159,7 +159,11 @@ function Set-ParametresWindows {
     try {
         $pol = Get-ExecutionPolicy -Scope LocalMachine
         if ($pol -eq 'Restricted' -or $pol -eq 'Undefined') {
-            Set-ExecutionPolicy RemoteSigned -Scope LocalMachine -Force -ErrorAction Stop
+            # Lancé avec "-ExecutionPolicy Bypass", Set-ExecutionPolicy enregistre bien le réglage
+            # mais signale une erreur (réglage masqué pour CE processus) : on vérifie nous-mêmes.
+            Set-ExecutionPolicy RemoteSigned -Scope LocalMachine -Force -ErrorAction SilentlyContinue
+            $pol = Get-ExecutionPolicy -Scope LocalMachine
+            if ($pol -ne 'RemoteSigned') { throw "réglage resté à $pol" }
             Write-Ok 'Politique d''exécution PowerShell : RemoteSigned.'
         } else {
             Write-Ok "Politique d'exécution PowerShell : $pol."
@@ -310,6 +314,27 @@ function Update-DossierLogiciels {
     if ($absents.Count -gt 0) { Write-Info "Non trouvés (logiciel absent ou nom différent) : $($absents -join ', ')" }
 }
 
+function Update-TousLesLogiciels {
+    Write-Etape 'Mise à jour de tous les logiciels Windows'
+    if (-not (Get-Command winget.exe -ErrorAction SilentlyContinue)) { return }
+    if ($script:Distro) { & wsl.exe --shutdown | Out-Null }   # libère WSL avant sa propre mise à jour
+
+    # Épinglage : ces paquets sont exclus de "upgrade --all" mais restent
+    # modifiables par une mise à jour explicite (faite en fin d'exécution).
+    $optionsPin = @('-e', '--source', 'winget', '--accept-source-agreements', '--disable-interactivity')
+    foreach ($id in $script:PaquetsEnFin) { $null = & winget.exe pin add --id $id @optionsPin }
+    # Jamais de version préliminaire de WSL (épinglage bloquant)
+    $null = & winget.exe pin add --id Microsoft.WSL.PreRelease --blocking @optionsPin
+    $script:MajEnFin = $true
+    # Source winget uniquement : une boutique Microsoft injoignable ne bloque plus toutes
+    # les mises à jour (les applications du Store se mettent à jour par le Store).
+    & winget.exe upgrade --all --source winget -h --accept-package-agreements --accept-source-agreements --disable-interactivity | Out-Host
+    $code = $LASTEXITCODE
+    # 0 = tout est à jour ; -1978335189 (0x8A15002B) = aucune mise à jour applicable
+    if ($code -eq 0 -or $code -eq -1978335189) { Write-Ok 'Mise à jour des logiciels terminée.' }
+    else { Write-Alerte ("Certaines mises à jour de logiciels ont échoué (code 0x{0:X8}, voir le journal)." -f $code) }
+}
+
 # =============================================================== ACTIVATION
 function Get-EtatActivationWindows {
     <#
@@ -377,40 +402,25 @@ function Test-ActivationWindows {
     if ($etatLicence.Definitif) { Write-Ok 'Windows est maintenant activé.' }
     else { Write-Alerte "Windows n'est toujours pas activé ($($etatLicence.Statut)). Vérifiez activation\activation_windows.ps1." }
 }
-
-function Update-TousLesLogiciels {
-    Write-Etape 'Mise à jour de tous les logiciels Windows'
-    if (-not (Get-Command winget.exe -ErrorAction SilentlyContinue)) { return }
-    if ($script:Distro) { & wsl.exe --shutdown | Out-Null }   # libère WSL avant sa propre mise à jour
-
-    # Épinglage : ces paquets sont exclus de "upgrade --all" mais restent
-    # modifiables par une mise à jour explicite (faite en fin d'exécution).
-    $optionsPin = @('-e', '--source', 'winget', '--accept-source-agreements', '--disable-interactivity')
-    foreach ($id in $script:PaquetsEnFin) { $null = & winget.exe pin add --id $id @optionsPin }
-    # Jamais de version préliminaire de WSL (épinglage bloquant)
-    $null = & winget.exe pin add --id Microsoft.WSL.PreRelease --blocking @optionsPin
-    $script:MajEnFin = $true
-    # Source winget uniquement : une boutique Microsoft injoignable ne bloque plus toutes
-    # les mises à jour (les applications du Store se mettent à jour par le Store).
-    & winget.exe upgrade --all --source winget -h --accept-package-agreements --accept-source-agreements --disable-interactivity | Out-Host
-    $code = $LASTEXITCODE
-    # 0 = tout est à jour ; -1978335189 (0x8A15002B) = aucune mise à jour applicable
-    if ($code -eq 0 -or $code -eq -1978335189) { Write-Ok 'Mise à jour des logiciels terminée.' }
-    else { Write-Alerte ("Certaines mises à jour de logiciels ont échoué (code 0x{0:X8}, voir le journal)." -f $code) }
-}
-
 # =============================================================== WSL
 function Enable-FonctionnaliteWSL {
     # Retourne $true si un redémarrage est nécessaire.
+    # Les deux fonctionnalités sont activées ENSEMBLE : "wsl --install" exige aussi
+    # VirtualMachinePlatform et, si elle manque, l'active lui-même puis abandonne
+    # en demandant un second redémarrage. Elle est sans effet sur WSL 1.
     Write-Etape 'Sous-système Linux (WSL 1)'
-    $f = Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-    if ($f.State -eq 'Enabled') { Write-Ok 'WSL est activé.'; return $false }
-    if ($f.State -eq 'EnablePending') { Write-Info 'WSL attend un redémarrage.'; return $true }
-
-    Write-Info 'Activation de WSL...'
-    $r = Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -All -NoRestart
-    Write-Ok 'WSL activé.'
-    return [bool]$r.RestartNeeded
+    $redemarrer = $false
+    foreach ($nom in 'Microsoft-Windows-Subsystem-Linux', 'VirtualMachinePlatform') {
+        $f = Get-WindowsOptionalFeature -Online -FeatureName $nom
+        if ($f.State -eq 'Enabled') { continue }
+        if ($f.State -eq 'EnablePending') { $redemarrer = $true; continue }
+        Write-Info "Activation de $nom..."
+        $r = Enable-WindowsOptionalFeature -Online -FeatureName $nom -All -NoRestart -WarningAction SilentlyContinue
+        if ($r.RestartNeeded) { $redemarrer = $true }
+    }
+    if ($redemarrer) { Write-Info 'WSL activé : un redémarrage est nécessaire.' }
+    else { Write-Ok 'WSL est activé.' }
+    return $redemarrer
 }
 
 function Get-DistributionsWSL {
@@ -433,7 +443,10 @@ function Find-Distribution {
 function Install-Distribution {
     Write-Etape "Installation de $DistroNouvelle"
     & wsl.exe --set-default-version 1 | Out-Host
-    & wsl.exe --install -d $DistroNouvelle --no-launch --web-download | Out-Host
+    # Sortie affichée ET conservée : on y cherche une éventuelle demande de redémarrage
+    $lignes = @(& wsl.exe --install -d $DistroNouvelle --no-launch --web-download 2>&1 |
+        ForEach-Object { $_.ToString() -replace "`0", '' })
+    $lignes | Out-Host
 
     if (-not ((Get-DistributionsWSL) -contains $DistroNouvelle)) {
         # Anciennes distributions "Store" : l'enregistrement passe par leur lanceur
@@ -444,6 +457,12 @@ function Install-Distribution {
         & wsl.exe --set-version $DistroNouvelle 1 2>&1 | Out-Null   # sans effet si déjà en WSL 1
         Write-Ok "$DistroNouvelle installée."
         return $DistroNouvelle
+    }
+    if (($lignes -join ' ') -match 'réamorc|redémarr|restart|reboot') {
+        # WSL a encore activé un composant : on redémarre puis on réessaie tout seul
+        Write-Info "Windows doit redémarrer avant d'installer $DistroNouvelle."
+        $script:RedemarrageDemande = $true
+        return $null
     }
     Write-Alerte "$DistroNouvelle n'a pas pu être installée. Relancez la mise à jour plus tard."
     return $null
@@ -599,6 +618,7 @@ function Invoke-Migrations {
 function Restart-EtReprendre([string]$ModeOrigine) {
     if ([int]$script:Etat.redemarrages -ge 2) {
         Write-Alerte 'Un redémarrage est encore demandé après deux tentatives : on continue sans redémarrer.'
+        $script:RedemarrageDemande = $false
         return
     }
     $script:Etat.redemarrages = [int]$script:Etat.redemarrages + 1
@@ -750,6 +770,7 @@ if (Enable-FonctionnaliteWSL) { Restart-EtReprendre $ModeEffectif }
 
 if (-not $script:Distro) {
     $script:Distro = Install-Distribution
+    if ($script:RedemarrageDemande) { Restart-EtReprendre $ModeEffectif }
     if ($script:Distro) { Initialize-UtilisateurLinux }
 }
 if ($script:Distro) { $script:Etat.distribution = $script:Distro; Save-Etat }
