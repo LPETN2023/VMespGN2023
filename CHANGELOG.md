@@ -1,5 +1,11 @@
 # Historique des versions
 
+## 2.4.3
+- Correction : la mise à jour générale des logiciels (`winget upgrade --all`) n'utilise plus que la source winget ; une boutique Microsoft injoignable ne la bloque plus. Un échec est désormais signalé dans le résumé.
+
+## 2.4.2
+- Correction : Microsoft Office est installé avec l'outil officiel de Microsoft (setup.exe téléchargé chez Microsoft, signature vérifiée) au lieu du paquet winget, dont l'empreinte n'était plus à jour (erreur 0x8A150011).
+
 ## 2.4.1
 - Correction : la source winget (winget ou msstore) est désormais précisée pour chaque logiciel. Une boutique Microsoft injoignable ne bloque plus l'installation d'Office ni des autres logiciels.
 

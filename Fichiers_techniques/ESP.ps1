@@ -376,8 +376,13 @@ function Update-TousLesLogiciels {
     Write-Etape 'Mise à jour de tous les logiciels Windows'
     if (-not (Get-Command winget.exe -ErrorAction SilentlyContinue)) { return }
     if ($script:Distro) { & wsl.exe --shutdown | Out-Null }   # libère WSL avant sa propre mise à jour
-    & winget.exe upgrade --all -h --accept-package-agreements --accept-source-agreements --disable-interactivity | Out-Host
-    Write-Ok 'Mise à jour winget terminée.'
+    # Source winget uniquement : une boutique Microsoft injoignable ne bloque plus toutes
+    # les mises à jour (les applications du Store se mettent à jour par le Store).
+    & winget.exe upgrade --all --source winget -h --accept-package-agreements --accept-source-agreements --disable-interactivity | Out-Host
+    $code = $LASTEXITCODE
+    # 0 = tout est à jour ; -1978335189 (0x8A15002B) = aucune mise à jour applicable
+    if ($code -eq 0 -or $code -eq -1978335189) { Write-Ok 'Mise à jour des logiciels terminée.' }
+    else { Write-Alerte ("Certaines mises à jour de logiciels ont échoué (code 0x{0:X8}, voir le journal)." -f $code) }
 }
 
 # =============================================================== WSL
