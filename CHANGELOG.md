@@ -1,5 +1,11 @@
 # Historique des versions
 
+## 2.4.4
+- Correction : la mise à jour de Windows Terminal fermait la fenêtre du script et interrompait la mise à jour générale.
+  Windows Terminal et App Installer (winget) sont désormais mis à jour en arrière-plan, après la fermeture de la fenêtre
+  (journal `*_composants.log`).
+- Les versions préliminaires de WSL (`Microsoft.WSL.PreRelease`) ne sont plus installées.
+
 ## 2.4.3
 - Correction : la mise à jour générale des logiciels (`winget upgrade --all`) n'utilise plus que la source winget ; une boutique Microsoft injoignable ne la bloque plus. Un échec est désormais signalé dans le résumé.
 

@@ -52,6 +52,12 @@ $script:Alertes  = New-Object System.Collections.Generic.List[string]
 $script:Distro   = $null
 $script:RedemarrageDemande = $false   # une migration peut le passer à $true
 
+# Paquets mis à jour APRÈS la fermeture de la fenêtre (voir Update-TousLesLogiciels) :
+#  - Windows Terminal : sa mise à jour ferme la fenêtre dans laquelle tourne ce script ;
+#  - App Installer : c'est winget lui-même (toujours en dernier).
+$script:PaquetsEnFin = @('Microsoft.WindowsTerminal', 'Microsoft.AppInstaller')
+$script:MajEnFin = $false
+
 # =============================================================== AFFICHAGE
 function Write-Etape([string]$Texte) {
     Write-Host ''
@@ -376,6 +382,14 @@ function Update-TousLesLogiciels {
     Write-Etape 'Mise à jour de tous les logiciels Windows'
     if (-not (Get-Command winget.exe -ErrorAction SilentlyContinue)) { return }
     if ($script:Distro) { & wsl.exe --shutdown | Out-Null }   # libère WSL avant sa propre mise à jour
+
+    # Épinglage : ces paquets sont exclus de "upgrade --all" mais restent
+    # modifiables par une mise à jour explicite (faite en fin d'exécution).
+    $optionsPin = @('-e', '--source', 'winget', '--accept-source-agreements', '--disable-interactivity')
+    foreach ($id in $script:PaquetsEnFin) { $null = & winget.exe pin add --id $id @optionsPin }
+    # Jamais de version préliminaire de WSL (épinglage bloquant)
+    $null = & winget.exe pin add --id Microsoft.WSL.PreRelease --blocking @optionsPin
+    $script:MajEnFin = $true
     # Source winget uniquement : une boutique Microsoft injoignable ne bloque plus toutes
     # les mises à jour (les applications du Store se mettent à jour par le Store).
     & winget.exe upgrade --all --source winget -h --accept-package-agreements --accept-source-agreements --disable-interactivity | Out-Host
@@ -611,6 +625,18 @@ function Restart-EtReprendre([string]$ModeOrigine) {
 }
 
 # =============================================================== FIN
+function Start-MiseAJourDifferee {
+    # Lancée dans un processus séparé et invisible, APRÈS la fermeture de la fenêtre :
+    # la mise à jour de Windows Terminal peut alors fermer ce qu'elle veut.
+    $journalDiff = Join-Path $DossierJournaux ('{0:yyyy-MM-dd_HH-mm-ss}_composants.log' -f (Get-Date))
+    $lignes = @('Start-Sleep -Seconds 5')
+    foreach ($id in $script:PaquetsEnFin) {
+        $lignes += "winget.exe upgrade --id $id -e --source winget -h --accept-package-agreements --accept-source-agreements --disable-interactivity *>> '$journalDiff'"
+    }
+    $code = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($lignes -join "`n"))
+    Start-Process powershell.exe -WindowStyle Hidden -ArgumentList "-NoProfile -ExecutionPolicy Bypass -EncodedCommand $code"
+}
+
 function Complete-Execution([string]$VersionDepot) {
     $script:Etat.version = $VersionDepot
     $script:Etat.reprise = ''
@@ -636,8 +662,13 @@ function Complete-Execution([string]$VersionDepot) {
     }
     Write-Host " Journal : $script:Journal"
     Write-Host '================================================================' -ForegroundColor Cyan
+    if ($script:MajEnFin) {
+        Write-Host ' Windows Terminal et le programme d''installation d''applications seront'
+        Write-Host ' mis à jour en arrière-plan après la fermeture de cette fenêtre.'
+    }
     Stop-Transcript | Out-Null
     Read-Host 'Appuyez sur Entrée pour fermer'
+    if ($script:MajEnFin) { Start-MiseAJourDifferee }
 }
 
 # ================================================================================
