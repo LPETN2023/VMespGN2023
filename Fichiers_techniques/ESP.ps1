@@ -347,74 +347,6 @@ function Update-TousLesLogiciels {
     if ($code -eq 0 -or $code -eq -1978335189) { Write-Ok 'Mise à jour des logiciels terminée.' }
     else { Write-Alerte ("Certaines mises à jour de logiciels ont échoué (code 0x{0:X8}, voir le journal)." -f $code) }
 }
-
-# =============================================================== ACTIVATION
-function Get-EtatActivationWindows {
-    <#
-      Lit l'état de la licence Windows (classe WMI SoftwareLicensingProduct).
-      LicenseStatus : 0 non activé, 1 activé, 2 à 6 = périodes de grâce
-      (essai des premiers jours, changement de matériel, notification...).
-      "Définitif" = activé (1) et pas une édition d'évaluation limitée dans le temps.
-    #>
-    $idWindows = '55c92734-d682-4d71-983e-d6ec3f16059f'   # identifiant de Windows dans le service de licences
-    $produits = @(Get-CimInstance -ClassName SoftwareLicensingProduct -ErrorAction Stop `
-        -Filter "ApplicationID='$idWindows' AND PartialProductKey IS NOT NULL")
-    if ($produits.Count -eq 0) {
-        return [pscustomobject]@{ Definitif = $false; Statut = 'aucune clé de produit installée'; Detail = '' }
-    }
-    $p = $produits | Sort-Object { if ($_.LicenseStatus -eq 1) { 0 } else { 1 } } | Select-Object -First 1
-    $libelles = @{
-        0 = 'non activé'; 1 = 'activé'; 2 = 'période d''essai initiale'
-        3 = 'période de grâce (changement de matériel)'; 4 = 'période de grâce (copie non authentique)'
-        5 = 'non activé (notifications)'; 6 = 'période de grâce prolongée'
-    }
-    $statut = $libelles[[int]$p.LicenseStatus]
-    if (-not $statut) { $statut = "état inconnu ($($p.LicenseStatus))" }
-    $evaluation = ("$($p.Description)" -match 'TIMEBASED_EVAL')
-    if ($evaluation) { $statut = 'version d''évaluation (limitée dans le temps)' }
-    $detail = ''
-    if ([int]$p.GracePeriodRemaining -gt 0) { $detail = "{0} jour(s) restant(s)" -f [math]::Floor($p.GracePeriodRemaining / 1440) }
-    return [pscustomobject]@{
-        Definitif = ([int]$p.LicenseStatus -eq 1 -and -not $evaluation)
-        Statut    = $statut
-        Detail    = $detail
-    }
-}
-
-function Test-ActivationWindows {
-    Write-Etape 'Activation de Windows'
-    try { $etatLicence = Get-EtatActivationWindows }
-    catch { Write-Alerte "État d'activation de Windows illisible : $($_.Exception.Message)"; return }
-
-    if ($etatLicence.Definitif) { Write-Ok 'Windows est activé.'; return }
-
-    $precision = ''
-    if ($etatLicence.Detail) { $precision = " ($($etatLicence.Detail))" }
-    Write-Info "Windows n'est pas activé définitivement : $($etatLicence.Statut)$precision."
-
-    # La commande d'activation se trouve dans un fichier séparé, à compléter par le mainteneur
-    $fichier = Join-Path $Tech 'activation\activation_windows.ps1'
-    $commandes = @(Get-Content $fichier -Encoding UTF8 -ErrorAction SilentlyContinue |
-        Where-Object { $_.Trim() -and -not $_.Trim().StartsWith('#') })
-    if ($commandes.Count -eq 0) {
-        Write-Alerte "Windows n'est pas activé : aucune commande d'activation configurée (activation\activation_windows.ps1)."
-        return
-    }
-
-    Write-Info 'Lancement de la commande d''activation...'
-    try {
-        $ErrorActionPreference = 'Stop'
-        . $fichier
-    } catch {
-        Write-Alerte "Commande d'activation en échec : $($_.Exception.Message)"
-    } finally {
-        $ErrorActionPreference = 'Continue'
-    }
-
-    try { $etatLicence = Get-EtatActivationWindows } catch { return }
-    if ($etatLicence.Definitif) { Write-Ok 'Windows est maintenant activé.' }
-    else { Write-Alerte "Windows n'est toujours pas activé ($($etatLicence.Statut)). Vérifiez activation\activation_windows.ps1." }
-}
 # =============================================================== WSL
 function Enable-FonctionnaliteWSL {
     # Retourne $true si un redémarrage est nécessaire.
@@ -627,6 +559,73 @@ function Invoke-Migrations {
     if ($faites -eq 0) { Write-Ok 'Aucune migration en attente.' }
 }
 
+# =============================================================== ACTIVATION
+function Get-EtatActivationWindows {
+    <#
+      Lit l'état de la licence Windows (classe WMI SoftwareLicensingProduct).
+      LicenseStatus : 0 non activé, 1 activé, 2 à 6 = périodes de grâce
+      (essai des premiers jours, changement de matériel, notification...).
+      "Définitif" = activé (1) et pas une édition d'évaluation limitée dans le temps.
+    #>
+    $idWindows = '55c92734-d682-4d71-983e-d6ec3f16059f'   # identifiant de Windows dans le service de licences
+    $produits = @(Get-CimInstance -ClassName SoftwareLicensingProduct -ErrorAction Stop `
+        -Filter "ApplicationID='$idWindows' AND PartialProductKey IS NOT NULL")
+    if ($produits.Count -eq 0) {
+        return [pscustomobject]@{ Definitif = $false; Statut = 'aucune clé de produit installée'; Detail = '' }
+    }
+    $p = $produits | Sort-Object { if ($_.LicenseStatus -eq 1) { 0 } else { 1 } } | Select-Object -First 1
+    $libelles = @{
+        0 = 'non activé'; 1 = 'activé'; 2 = 'période d''essai initiale'
+        3 = 'période de grâce (changement de matériel)'; 4 = 'période de grâce (copie non authentique)'
+        5 = 'non activé (notifications)'; 6 = 'période de grâce prolongée'
+    }
+    $statut = $libelles[[int]$p.LicenseStatus]
+    if (-not $statut) { $statut = "état inconnu ($($p.LicenseStatus))" }
+    $evaluation = ("$($p.Description)" -match 'TIMEBASED_EVAL')
+    if ($evaluation) { $statut = 'version d''évaluation (limitée dans le temps)' }
+    $detail = ''
+    if ([int]$p.GracePeriodRemaining -gt 0) { $detail = "{0} jour(s) restant(s)" -f [math]::Floor($p.GracePeriodRemaining / 1440) }
+    return [pscustomobject]@{
+        Definitif = ([int]$p.LicenseStatus -eq 1 -and -not $evaluation)
+        Statut    = $statut
+        Detail    = $detail
+    }
+}
+
+function Test-ActivationWindows {
+    Write-Etape 'Activation de Windows'
+    try { $etatLicence = Get-EtatActivationWindows }
+    catch { Write-Alerte "État d'activation de Windows illisible : $($_.Exception.Message)"; return }
+
+    if ($etatLicence.Definitif) { Write-Ok 'Windows est activé.'; return }
+
+    $precision = ''
+    if ($etatLicence.Detail) { $precision = " ($($etatLicence.Detail))" }
+    Write-Info "Windows n'est pas activé définitivement : $($etatLicence.Statut)$precision."
+
+    # La commande d'activation se trouve dans un fichier séparé, à compléter par le mainteneur
+    $fichier = Join-Path $Tech 'activation\activation_windows.ps1'
+    $commandes = @(Get-Content $fichier -Encoding UTF8 -ErrorAction SilentlyContinue |
+        Where-Object { $_.Trim() -and -not $_.Trim().StartsWith('#') })
+    if ($commandes.Count -eq 0) {
+        Write-Alerte "Windows n'est pas activé : aucune commande d'activation configurée (activation\activation_windows.ps1)."
+        return
+    }
+
+    Write-Info 'Lancement de la commande d''activation...'
+    try {
+        $ErrorActionPreference = 'Stop'
+        . $fichier
+    } catch {
+        Write-Alerte "Commande d'activation en échec : $($_.Exception.Message)"
+    } finally {
+        $ErrorActionPreference = 'Continue'
+    }
+
+    try { $etatLicence = Get-EtatActivationWindows } catch { return }
+    if ($etatLicence.Definitif) { Write-Ok 'Windows est maintenant activé.' }
+    else { Write-Alerte "Windows n'est toujours pas activé ($($etatLicence.Statut)). Vérifiez activation\activation_windows.ps1." }
+}
 # =============================================================== REDÉMARRAGE
 function Restart-EtReprendre([string]$ModeOrigine) {
     if ([int]$script:Etat.redemarrages -ge 2) {
