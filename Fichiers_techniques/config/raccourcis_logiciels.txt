@@ -33,8 +33,7 @@ VeraCrypt        = VeraCrypt
 # --- Analyse
 Wireshark        = Wireshark
 HashTools        = HashTools*
-HTTrack          = WinHTTrack*
-HTTrack          = HTTrack*
+HTTrack          = WinHTTrack* | HTTrack*
 
 # --- Multimédia
 OBS Studio       = OBS Studio*

@@ -287,12 +287,26 @@ function Update-DossierLogiciels {
 
     $menus = @("$env:ProgramData\Microsoft\Windows\Start Menu\Programs",
                "$env:APPDATA\Microsoft\Windows\Start Menu\Programs")
-    $exclus = 'uninstall|d[ée]sinstall|readme|lisez|website|site web|help|aide|manual|documentation|license|licence'
+    # Raccourcis annexes à ignorer. Attention : pas "website", sinon
+    # "WinHTTrack Website Copier" serait ignoré.
+    $exclus = 'uninstall|d[ée]sinstall|readme|lisez|help|aide|manual|documentation|license|licence'
     $lnkMenu = @(Get-ChildItem -Path $menus -Recurse -Filter '*.lnk' -ErrorAction SilentlyContinue |
         Where-Object { $_.BaseName -notmatch $exclus })
     $applis = $null
     $wsh = New-Object -ComObject WScript.Shell
     $faits = 0
+
+    # Rangement : retire du Bureau le raccourci déposé par l'installeur, reconnu
+    # par son nom ("LibreOffice 26.8" pour "LibreOffice*") OU par le programme qu'il
+    # lance (le nom sur le Bureau diffère parfois de celui du menu Démarrer).
+    function Remove-DoublonBureau([string[]]$Motifs, [string]$Cible) {
+        Get-ChildItem -Path $bureau, $public -Filter '*.lnk' -ErrorAction SilentlyContinue |
+            Where-Object {
+                $lnkBureau = $_
+                ($Motifs | Where-Object { $lnkBureau.BaseName -like "$_*" }) -or
+                ($Cible -and $wsh.CreateShortcut($lnkBureau.FullName).TargetPath -eq $Cible)
+            } | Remove-Item -Force -ErrorAction SilentlyContinue
+    }
     $absents = @()
 
     foreach ($ligne in Read-Liste 'raccourcis_logiciels.txt') {
@@ -307,28 +321,24 @@ function Update-DossierLogiciels {
             if ($r -match '\\') {
                 # Chemin direct vers un programme
                 $cible = [Environment]::ExpandEnvironmentVariables($r)
-                if (Test-Path $cible) { New-Raccourci $lnk $cible; $trouve = $true; break }
+                if (Test-Path $cible) { New-Raccourci $lnk $cible; Remove-DoublonBureau @() $cible; $trouve = $true; break }
                 continue
             }
             # Raccourci du menu Démarrer
             $m = $lnkMenu | Where-Object { $_.BaseName -like $r } | Sort-Object { $_.BaseName.Length } | Select-Object -First 1
             if ($m) {
                 Copy-Item -Path $m.FullName -Destination $lnk -Force
-                # Rangement : on retire le doublon déposé sur le Bureau par l'installeur.
-                # Reconnu par son nom ("LibreOffice 26.8" pour "LibreOffice") OU par le
-                # programme qu'il lance (le nom sur le Bureau diffère parfois du menu Démarrer).
-                $cibleMenu = $wsh.CreateShortcut($m.FullName).TargetPath
-                Get-ChildItem -Path $bureau, $public -Filter '*.lnk' -ErrorAction SilentlyContinue |
-                    Where-Object {
-                        $_.BaseName -like "$r*" -or
-                        ($cibleMenu -and $wsh.CreateShortcut($_.FullName).TargetPath -eq $cibleMenu)
-                    } | Remove-Item -Force -ErrorAction SilentlyContinue
+                Remove-DoublonBureau $recherches ($wsh.CreateShortcut($m.FullName).TargetPath)
                 $trouve = $true; break
             }
             # Applications du Microsoft Store (WhatsApp...)
             if ($null -eq $applis) { $applis = @(Get-StartApps -ErrorAction SilentlyContinue) }
             $a = $applis | Where-Object { $_.Name -like $r } | Select-Object -First 1
-            if ($a) { New-Raccourci $lnk "$env:WINDIR\explorer.exe" "shell:AppsFolder\$($a.AppID)"; $trouve = $true; break }
+            if ($a) {
+                New-Raccourci $lnk "$env:WINDIR\explorer.exe" "shell:AppsFolder\$($a.AppID)"
+                Remove-DoublonBureau $recherches ''
+                $trouve = $true; break
+            }
         }
         if ($trouve) { $faits++ } else { $absents += $nom }
     }

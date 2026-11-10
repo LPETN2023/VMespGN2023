@@ -1,5 +1,10 @@
 # Historique des versions
 
+## 2.4.7
+- Correction : le raccourci « HTTrack Website Copier » restait sur le Bureau. Le mot « Website » faisait ignorer
+  le raccourci du menu Démarrer de HTTrack. Le rangement du Bureau fonctionne maintenant quelle que soit la façon
+  dont le logiciel a été trouvé (menu Démarrer, chemin direct ou application du Store).
+
 ## 2.4.6
 - Toutes les questions (mot de passe Linux, mise à jour d'Ubuntu) sont posées en premier. Une fenêtre prévient
   ensuite l'utilisateur qu'il n'a plus rien à faire, et une autre l'avertit à la fin.
