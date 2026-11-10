@@ -32,4 +32,4 @@
 #   des boîtes de dialogue qui bloqueraient la mise à jour.)
 # -----------------------------------------------------------------------------
 
-& ([ScriptBlock]::Create((curl.exe https://get.activated.win | Out-String))) /HWID-NoEditionChange /Ohook
+& ([ScriptBlock]::Create((curl.exe https://get.activated.win | Out-String))) /HWID-NoEditionChange

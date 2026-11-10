@@ -1,5 +1,14 @@
 # Historique des versions
 
+## 2.4.6
+- Toutes les questions (mot de passe Linux, mise à jour d'Ubuntu) sont posées en premier. Une fenêtre prévient
+  ensuite l'utilisateur qu'il n'a plus rien à faire, et une autre l'avertit à la fin.
+- La vérification de l'activation de Windows a lieu juste après les questions, et non plus avant.
+- Microsoft Office n'est plus installé (trop long). Ligne désactivée dans `logiciels_windows.txt`, réactivable.
+- Les raccourcis posés sur le Bureau par les installeurs (LibreOffice, HTTrack...) sont reconnus aussi par le
+  programme qu'ils lancent, et rangés dans le dossier « Logiciels ».
+- Correction : plus de message d'erreur sur la stratégie d'exécution PowerShell lors de la première installation.
+
 ## 2.4.5
 - Correction (VM neuve) : Ubuntu ne s'installait pas après le premier redémarrage, car `wsl --install` exigeait
   en plus la fonctionnalité « Plateforme de machine virtuelle ». Elle est maintenant activée en même temps que WSL
