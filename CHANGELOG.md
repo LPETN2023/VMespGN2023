@@ -1,5 +1,14 @@
 # Historique des versions
 
+## 2.4.8
+- Vérifications automatiques sur GitHub à chaque envoi (onglet « Actions ») : syntaxe et analyse des scripts
+  PowerShell, BOM des `.ps1`, absence d'accents dans les `.bat`, fichiers de compatibilité présents,
+  « Mise à jour du système.bat » inchangé, migrations publiées non modifiées, lignes de
+  `logiciels_a_desinstaller.txt` conservées, entrée du CHANGELOG, absence de clé de produit.
+- Retrait du code mort de Microsoft Office (`installateurs/MicrosoftOffice.ps1`, `config/office.xml`,
+  lignes commentées). Office déjà installé sur une VM n'est pas touché.
+- Tutoriel utilisateur et guide du mainteneur régénérés (dossier `Documentation/`, sources HTML incluses).
+
 ## 2.4.7
 - Correction : le raccourci « HTTrack Website Copier » restait sur le Bureau. Le mot « Website » faisait ignorer
   le raccourci du menu Démarrer de HTTrack. Le rangement du Bureau fonctionne maintenant quelle que soit la façon

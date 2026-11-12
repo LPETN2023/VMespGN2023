@@ -17,7 +17,6 @@ Microsoft.WSL                            # Sous-système Linux (remplace l'ID St
 7zip.7zip
 Notepad++.Notepad++
 TheDocumentFoundation.LibreOffice
-# script:MicrosoftOffice                 # DÉSACTIVÉ (installation trop longue). Retirez le "#" pour le réactiver.
 
 # --- Navigateurs
 Mozilla.Firefox

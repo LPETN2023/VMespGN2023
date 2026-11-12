@@ -16,7 +16,6 @@ Une VM restée plusieurs versions en arrière rattrape donc tout en une seule mi
 | Ajouter un logiciel Windows | Ajouter son ID dans `config/logiciels_windows.txt` (`winget search <nom>` pour le trouver), et une ligne dans `config/raccourcis_logiciels.txt` pour qu'il apparaisse dans le dossier « Logiciels » du Bureau |
 | Installer un logiciel que winget gère mal | Écrire `installateurs/Nom.ps1` (modèle : `TorBrowser.ps1`) et mettre `script:Nom` dans `logiciels_windows.txt` |
 | Retirer un logiciel Windows | Supprimer sa ligne de `logiciels_windows.txt` **et** l'ajouter dans `config/logiciels_a_desinstaller.txt` |
-| Réinstaller Microsoft Office (désactivé depuis la 2.4.6) | Retirer le `#` devant `script:MicrosoftOffice` dans `logiciels_windows.txt` (et devant Word, Excel... dans `raccourcis_logiciels.txt`). Réglages : `config/office.xml` |
 | Ajouter un paquet Ubuntu | Une ligne dans `config/paquets_apt.txt` |
 | Ajouter un outil Python (OSINT…) | Le nom PyPI dans `config/outils_python.txt` |
 | Activer Windows automatiquement (installation et mises à jour) | Coller la commande dans `activation/activation_windows.ps1` (sans `#` au début). Attention : le dépôt est public, une clé de produit y serait visible |
@@ -65,6 +64,29 @@ Les VM installées en 2023 utilisent encore ces chemins :
 | `Fichiers_techniques/Installation_Apps_WSL.sh` | Plus utilisé. Il a pu être modifié localement par l'ancien `sed -i` ; le supprimer pourrait bloquer le `git pull` des anciennes VM. |
 
 Fichiers de la version 1 qui peuvent être supprimés : `Fichiers_techniques/Installation_WSL.bat` et `Fichiers_techniques/Texte_WSL.txt`.
+
+## Vérifications automatiques (GitHub)
+
+À chaque `push`, GitHub lance `.github/verifier.py` et l'analyse des scripts PowerShell
+(fichier `.github/workflows/verifications.yml`). Le résultat apparaît dans l'onglet **Actions** du dépôt
+(coche verte ou croix rouge) et GitHub envoie un e-mail en cas d'échec.
+
+Attention : les VM récupèrent `main` dès leur prochaine mise à jour, même si la vérification a échoué.
+En cas de croix rouge, corrigez et poussez **tout de suite** une nouvelle version.
+
+Contrôles effectués : syntaxe et erreurs PowerShell, BOM des `.ps1`, pas d'accents dans les `.bat`,
+fichiers de compatibilité v1 présents, « Mise à jour du système.bat » inchangé, migrations publiées
+non modifiées et numérotées sans trou, lignes de `logiciels_a_desinstaller.txt` conservées,
+entrée `## <VERSION>` dans le CHANGELOG, aucune clé de produit en clair.
+
+Pour lancer le contrôle sur votre PC avant de pousser (Python requis) :
+`python .github\verifier.py origin/main`
+
+## Documentation
+
+`Documentation/` contient le tutoriel utilisateur et le guide du mainteneur en PDF, avec leurs sources
+HTML (`Documentation/sources/`). Pour les mettre à jour : modifier le HTML puis l'imprimer en PDF
+(Chrome : Ctrl+P › Enregistrer au format PDF, marges par défaut, « Graphiques d'arrière-plan » coché).
 
 ## Règles techniques
 

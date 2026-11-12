@@ -1,0 +1,48 @@
+# Vérifications automatiques à chaque push sur GitHub (gratuit pour un dépôt public).
+# Résultat : onglet « Actions » du dépôt ; un e-mail est envoyé en cas d'échec.
+name: Vérifications
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Liste de contrôle (formats, migrations, fichiers protégés, clés)
+        run: python3 .github/verifier.py "${{ github.event.before || github.event.pull_request.base.sha }}"
+
+      - name: Syntaxe des scripts PowerShell
+        shell: pwsh
+        run: |
+          $erreurs = 0
+          Get-ChildItem -Recurse -Filter *.ps1 | ForEach-Object {
+            $tokens = $null; $errs = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$tokens, [ref]$errs) | Out-Null
+            foreach ($e in $errs) {
+              Write-Host "::error file=$($_.FullName),line=$($e.Extent.StartLineNumber)::$($e.Message)"
+              $erreurs++
+            }
+          }
+          if ($erreurs) { exit 1 } else { Write-Host 'Syntaxe PowerShell : OK' }
+
+      - name: Analyse PowerShell (erreurs seulement)
+        shell: pwsh
+        run: |
+          if (-not (Get-Module -ListAvailable PSScriptAnalyzer)) {
+            Install-Module PSScriptAnalyzer -Force -Scope CurrentUser
+          }
+          $r = Invoke-ScriptAnalyzer -Path . -Recurse -Severity Error
+          $r | ForEach-Object { Write-Host "::error file=$($_.ScriptPath),line=$($_.Line)::$($_.RuleName) : $($_.Message)" }
+          if ($r) { exit 1 } else { Write-Host 'Analyse : aucune erreur' }
+
+      - name: Syntaxe des scripts bash
+        run: |
+          for f in $(git ls-files '*.sh'); do bash -n "$f" || exit 1; done
+          echo 'Syntaxe bash : OK'

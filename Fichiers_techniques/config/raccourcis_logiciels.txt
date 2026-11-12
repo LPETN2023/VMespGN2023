@@ -43,12 +43,6 @@ SplitCam         = SplitCam*
 
 # --- Bureautique / outils
 LibreOffice      = LibreOffice
-# Microsoft Office n'est plus installé : retirez les "#" ci-dessous s'il revient.
-# Word             = Word
-# Excel            = Excel
-# PowerPoint       = PowerPoint
-# Outlook          = Outlook (classic) | Outlook
-# OneNote          = OneNote
 Notepad++        = Notepad++
 7-Zip            = 7-Zip File Manager
 Ubuntu (WSL)     = Ubuntu*
