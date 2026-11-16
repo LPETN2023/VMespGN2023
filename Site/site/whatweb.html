@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Whatweb : Serveur de site internet</title>
+<link rel="stylesheet" href="style.css">
+<script src="menu.js"></script><script src="site.js" defer></script>
+</head><body>
+<header id="entete"></header>
+<main id="contenu">
+  <section class="bloc" data-bloc="titre"><h1>Whatweb : Serveur de site internet</h1></section>
+  <section class="bloc" data-bloc="texte">
+<p>La machine virtuelle dispose d'une distribution Linux intégrée, qui vous permet d'utiliser des outils de recherche en sources ouvertes ou d'aide aux investigations.</p>
+<p>Choisissez ci-dessous le type d'investigations que vous souhaitez mener et laissez-vous guider dans la création de la ligne de commande nécessaire.</p>
+<p>Cette ligne de commande devra simplement être copiée/collée dans le terminal WSL.</p>
+</section>
+  <section class="bloc" data-bloc="images"><figure class="petite"><img class="zoom" src="images/om63gure97.jpg" alt="Recherche WSL dans le menu Windows"></figure><figure class="petite"><img class="zoom" src="images/n4h34024fx.jpg" alt="Application WSL : Exécuter la commande"></figure></section>
+  <section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/0j0w5viaet.jpg" alt="Terminal WSL ouvert"></figure></section>
+  <section class="bloc" data-bloc="titre"><h2>Whatweb</h2></section>
+  <section class="bloc" data-bloc="texte">
+<p>WhatWeb est un outil de reconnaissance automatisée qui scanne les sites web pour identifier les technologies qu'ils utilisent. Pour l'enquêteur, l'intérêt est de pouvoir obtenir l'adresse IP du serveur sur lequel est hébergé le site internet.</p>
+<p>Munissez-vous de l'adresse du nom de domaine sur laquelle portent vos investigations (au format "google.fr", sans utiliser "www" ou "https://"). Renseignez cette donnée dans le champ ci-dessous :</p>
+</section>
+  <section class="bloc" data-bloc="generateur">
+   <div class="generateur" data-modele="whatweb {url}"
+        data-erreur="Veuillez entrer une URL.">
+    <label>Entrez une URL : <input data-champ="url" placeholder="Entrez une URL"></label>
+    <button type="button">Générer</button>
+    <p class="aide">(Format : example.com)</p>
+    <output></output> <span class="statut"></span>
+   </div>
+  </section>
+  <section class="bloc" data-bloc="texte">
+<p>Le résultat obtenu se présente sous cette forme :</p>
+</section>
+  <section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/kh1vkrh2ey.jpg" alt="Exemple de résultat Whatweb"></figure></section>
+  <section class="bloc" data-bloc="texte">
+<p>Les plus importantes sont les premières IP visibles, ici "142.250.178.131" (pour http://google.fr) et "142.250.201.163" (pour http://www.google.fr). Il s'agit des adresses IP des serveurs hébergeant le site internet.</p>
+</section>
+</main>
+<footer id="pied"></footer>
+</body></html>

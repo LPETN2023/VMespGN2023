@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Telepathy : Investigations sur Telegram</title>
+<link rel="stylesheet" href="style.css">
+<script src="menu.js"></script><script src="site.js" defer></script>
+</head><body>
+<header id="entete"></header>
+<main id="contenu">
+  <section class="bloc" data-bloc="titre"><h1>Telepathy : Investigations sur Telegram</h1></section>
+  <section class="bloc" data-bloc="texte">
+<p>La machine virtuelle dispose d'une distribution Linux intégrée, qui vous permet d'utiliser des outils de recherche en sources ouvertes ou d'aide aux investigations.</p>
+<p>Choisissez ci-dessous le type d'investigations que vous souhaitez mener et laissez-vous guider dans la création de la ligne de commande nécessaire.</p>
+<p>Cette ligne de commande devra simplement être copiée/collée dans le terminal WSL.</p>
+</section>
+  <section class="bloc" data-bloc="images"><figure class="petite"><img class="zoom" src="images/om63gure97.jpg" alt="Recherche WSL dans le menu Windows"></figure><figure class="petite"><img class="zoom" src="images/n4h34024fx.jpg" alt="Application WSL : Exécuter la commande"></figure></section>
+  <section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/0j0w5viaet.jpg" alt="Terminal WSL ouvert"></figure></section>
+  <section class="bloc" data-bloc="titre"><h2>Telepathy</h2></section>
+  <section class="bloc" data-bloc="texte">
+<p>Telepathy est un système permettant de procéder à des investigations ou de récupérer des données présentes sur l'application "Telegram".</p>
+<p><strong>Attention, certaines données récupérées peuvent être couvertes par les droits RGPD. Une fois celles-ci entrées en procédure, vous devez impérativement les supprimer de votre système. Leur préservation est interdite.</strong></p>
+<p>Avant de pouvoir utiliser "Telepathy", vous devez disposer d'un compte "Telegram" et suivre les indications ci-dessous :</p>
+</section>
+  <section class="bloc" data-bloc="accordeon">
+   <details><summary>Paramétrage initial</summary><div class="details-corps">
+  <section class="bloc" data-bloc="titre"><h3>1) Procurez-vous un numéro "API"</h3></section>
+  <section class="bloc" data-bloc="texte">
+<p>Assurez-vous d'être connectés à votre compte "Telegram" et de disposer du numéro de téléphone auquel il est lié. Rendez-vous ensuite sur le site "<a href="https://my.telegram.org">https://my.telegram.org</a>".</p>
+<p>Il vous est demandé d'entrer le numéro de téléphone de votre compte "Telegram". Un code vous sera envoyé en message privé sur l'application, qu'il faudra indiquer sur le site internet.</p>
+</section>
+  <section class="bloc" data-bloc="images"><figure class="moyenne"><img class="zoom" src="images/capture-api-telegram.png" alt="Page my.telegram.org : saisie du numéro de téléphone"></figure><figure class="petite"><img class="zoom" src="images/niqyepx8t4.jpg" alt="Page my.telegram.org : API development tools"></figure></section>
+  <section class="bloc" data-bloc="texte">
+<p>Cliquez sur "API development tools".</p>
+<p>S'il vous est demandé des informations pour créer votre API, indiquez-en au hasard (inutile de renseigner la case "URL").</p>
+</section>
+  <section class="bloc" data-bloc="texte">
+<p>Laissez cette page ouverte, vous aurez besoin de certaines informations qu'elle contient.</p>
+</section>
+  <section class="bloc" data-bloc="titre"><h3>2) Procédez au paramétrage de "Telepathy"</h3></section>
+  <section class="bloc" data-bloc="texte">
+<p>Lancez ensuite le terminal "WSL" comme expliqué au début de la page. Utilisez la commande "telepathy" et suivez ces étapes :</p>
+</section>
+  <section class="bloc" data-bloc="image"><figure class="petite"><img class="zoom" src="images/8k00bkjjd3.jpg" alt="Commande telepathy dans le terminal WSL"></figure></section>
+  <section class="bloc" data-bloc="texte">
+<p>Au premier démarrage de Telepathy, il vous est demandé d'entrer certaines informations. Ces dernières seront sauvegardées. Vous n'aurez normalement pas à les modifier.</p>
+<ul>
+<li>Nom d'utilisateur et numéro de téléphone : Se trouvent dans les paramètres du compte Telegram</li>
+<li>API ID et API Hash : Ces éléments se trouvent sur le site internet "my.telegram.org", consulté précédemment</li>
+</ul>
+</section>
+  <section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/capture-api-site-telegram.png" alt="Page my.telegram.org : API ID et API Hash"></figure></section>
+  <section class="bloc" data-bloc="texte">
+<p>Une fois le premier paramétrage effectué, lancez le programme à l'aide de la commande "telepathy".</p>
+<p>Plusieurs informations vous seront demandées afin de pouvoir lancer le téléchargement :</p>
+<ul>
+<li>Nom du canal ou du compte à scraper :
+<p>Cette information est disponible dans les paramètres du compte ou de l'utilisateur.</p>
+<p><strong>Attention</strong> à bien respecter le format (https://t.me/nom_du_canal ou @nom_de_l'utilisateur)</p></li>
+<li>Nom de sortie du fichier :
+<p>Il s'agit du nom qui sera donné au dossier créé avec les données scrapées.</p>
+<p><strong>Attention</strong> à ne pas utiliser de caractères spéciaux ni d'espace.</p></li>
+<li>Date de début : (appuyer directement sur "Enter" pour utiliser la valeur par défaut)
+<p>Il s'agit de la date à partir de laquelle seront récupérées les données.</p>
+<p>Vous n'êtes pas obligé de renseigner ce champ, qui prendra par défaut la valeur antérieure d'un an par rapport à la date du jour.</p></li>
+<li>Date de fin : (appuyer directement sur "Enter" pour utiliser la valeur par défaut)
+<p>Il s'agit de la date jusqu'à laquelle seront récupérées les données.</p>
+<p>Vous n'êtes pas obligé de renseigner ce champ, qui prendra par défaut la date du jour.</p></li>
+<li>Mot-clé : (appuyer directement sur "Enter" pour ne pas en utiliser)
+<p>En cas de recherche de post présentant un terme en particulier.</p></li>
+<li>Nombre maximum de messages à scraper : (appuyer directement sur "Enter" pour utiliser la valeur par défaut)
+<p>Limite le nombre de messages récupérés. Permet de limiter le temps de traitement.</p>
+<p>La valeur par défaut est de 1 000 000 messages.</p></li>
+<li>Limite de temps en secondes : (appuyer directement sur "Enter" pour utiliser la valeur par défaut)
+<p>Permet de limiter le temps de traitement.</p>
+<p>La valeur par défaut est de 21 600 secondes.</p></li>
+</ul>
+<p><em>Par intermittence, il pourra vous être demandé de renseigner à nouveau le numéro de téléphone lié à votre compte "Telegram", ainsi que le nouveau code reçu en message privé.</em></p>
+<p>Une fois les données récupérées, un dossier sera créé sur le "Bureau" de votre compte "Windows". Il contiendra un document de type tableur reprenant les messages récupérés. Si celui-ci contient un média (photo, vidéo, etc.), un lien "cliquable" sera présent, permettant d'accéder à ce contenu.</p>
+</section>
+   </div></details>
+  </section>
+  <section class="bloc" data-bloc="titre"><h2>Récupération d'un "canal" Telegram</h2></section>
+  <section class="bloc" data-bloc="generateur">
+   <div class="generateur" data-modele="telepathy -t {canal} -c -f{medias}; cp -r ./telepathy_files/{canal} &quot;$(wslpath &quot;$(powershell.exe '[System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::DesktopDirectory)'&quot;)&quot; | tr -d '\r')&quot;; rm -R ./telepathy_files/{canal}"
+        data-erreur="Veuillez entrer le nom du canal.">
+    <label>Entrez le nom du "canal" : <input data-champ="canal" placeholder="(Format : @canal)"></label>
+    <label><input type="checkbox" data-option="medias" data-valeur=" -m"> Extraire les médias ?</label>
+    <button type="button">Générer</button>
+    <output></output> <span class="statut"></span>
+   </div>
+  </section>
+  <section class="bloc" data-bloc="titre"><h2>Utilisateur</h2></section>
+  <section class="bloc" data-bloc="generateur">
+   <div class="generateur" data-modele="telepathy -t {utilisateur} -u"
+        data-erreur="Veuillez entrer le nom d'utilisateur.">
+    <label>Entrez le nom d'utilisateur : <input data-champ="utilisateur" placeholder="(Format : @utilisateur)"></label>
+    <button type="button">Générer</button>
+    <output></output> <span class="statut"></span>
+   </div>
+  </section>
+  <section class="bloc" data-bloc="generateur">
+   <div class="generateur" data-modele="Test"
+        data-erreur="Veuillez remplir le champ.">
+    <label>Entrez une valeur : <input data-champ="valeur" placeholder="placeholder test"></label>
+    <button type="button">Générer</button>
+    <p class="aide">aide test</p>
+    <output></output> <span class="statut"></span>
+   </div>
+  </section>
+</main>
+<footer id="pied"></footer>
+</body></html>

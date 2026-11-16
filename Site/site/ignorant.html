@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ignorant : Numéros de téléphone</title>
+<link rel="stylesheet" href="style.css">
+<script src="menu.js"></script><script src="site.js" defer></script>
+</head><body>
+<header id="entete"></header>
+<main id="contenu">
+  <section class="bloc" data-bloc="titre"><h1>Ignorant : Numéros de téléphone</h1></section>
+  <section class="bloc" data-bloc="texte">
+<p>La machine virtuelle dispose d'une distribution Linux intégrée, qui vous permet d'utiliser des outils de recherche en sources ouvertes ou d'aide aux investigations.</p>
+<p>Choisissez ci-dessous le type d'investigations que vous souhaitez mener et laissez-vous guider dans la création de la ligne de commande nécessaire.</p>
+<p>Cette ligne de commande devra simplement être copiée/collée dans le terminal WSL.</p>
+</section>
+  <section class="bloc" data-bloc="images"><figure class="petite"><img class="zoom" src="images/om63gure97.jpg" alt="Recherche WSL dans le menu Windows"></figure><figure class="petite"><img class="zoom" src="images/n4h34024fx.jpg" alt="Application WSL : Exécuter la commande"></figure></section>
+  <section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/0j0w5viaet.jpg" alt="Terminal WSL ouvert"></figure></section>
+  <section class="bloc" data-bloc="titre"><h2>Ignorant</h2></section>
+  <section class="bloc" data-bloc="texte">
+<p>Ignorant permet d'interroger un grand nombre de sites internet afin de vérifier s'ils disposent d'un compte utilisateur associé à un numéro de téléphone.</p>
+<p>Entrez le numéro dans le champ suivant :</p>
+</section>
+  <section class="bloc" data-bloc="generateur">
+   <div class="generateur" data-modele="ignorant +{indicatif}{numero}"
+        data-erreur="Veuillez entrer l'indicatif et le numéro de téléphone.">
+    <label>Entrez l'indicatif : <input data-champ="indicatif" placeholder="Ex.: 33" data-format="chiffres"></label>
+    <label>Entrez la suite du numéro de téléphone : <input data-champ="numero" placeholder="Ex.: 601020304" data-format="chiffres"></label>
+    <button type="button">Générer</button>
+    <p class="aide">(Format : 33 601020304)</p>
+    <output></output> <span class="statut"></span>
+   </div>
+  </section>
+  <section class="bloc" data-bloc="texte">
+<p>Le résultat obtenu se présente sous cette forme :</p>
+</section>
+  <section class="bloc" data-bloc="image"><figure class="petite"><img class="zoom" src="images/u8hvn7rr9m.jpg" alt="Exemple de résultat Ignorant (légende)"></figure></section>
+  <section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/547qrfbdh3.jpg" alt="Exemple de résultat Ignorant (ligne de résultat)"></figure></section>
+</main>
+<footer id="pied"></footer>
+</body></html>

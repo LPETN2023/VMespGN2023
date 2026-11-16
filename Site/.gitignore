@@ -1,0 +1,5 @@
+# Seul le dossier "site" est envoyé sur GitHub.
+# Tout le reste (admin, outils, _ancien_wwb, _sauvegardes, .omc, AGENTS.md, README.md...) reste en local.
+/*
+!/site/
+!/.gitignore

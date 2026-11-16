@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Initialisation du système</title>
+<link rel="stylesheet" href="style.css">
+<script src="menu.js"></script><script src="site.js" defer></script>
+</head><body>
+<header id="entete"></header>
+<main id="contenu">
+<section class="bloc" data-bloc="titre"><h1>Initialisation du système</h1></section>
+<section class="bloc" data-bloc="texte"><p>Certaines actions sont à réaliser à chaque démarrage de la machine virtuelle. Vous les trouverez dans la partie "Actes réflexes".</p>
+<p>Au moment de la première initialisation, veuillez suivre les instructions présentes dans la partie "Premier paramétrage". Ceci vous permettra d'utiliser la machine virtuelle de manière simple et efficace.</p></section>
+<section class="bloc" data-bloc="accordeon"><details><summary>Actes réflexes</summary><div class="details-corps">
+<section class="bloc" data-bloc="texte"><p>Il s'agit de l'ensemble des actions devant systématiquement être effectuées au début de chaque lancement de la machine virtuelle.</p></section>
+<section class="bloc" data-bloc="cases"><ul class="cases">
+<li><label><input type="checkbox"> Mise à jour du système d'exploitation :</label></li>
+</ul></section>
+<section class="bloc" data-bloc="texte"><p>En premier lieu, vérifiez que le système d'exploitation installé sur la machine virtuelle est à jour :</p></section>
+<section class="bloc" data-bloc="html"><div class="rangee-fleche"><figure class="moyenne"><img class="zoom" src="images/recherche-verifier-les-maj.png" alt="Champ de recherche : vérifier les mises à jour"></figure><span class="fleche" aria-hidden="true">&rarr;</span><figure class="moyenne"><img class="zoom" src="images/bouton-verifier-les-maj.png" alt="Bouton Rechercher les mises à jour"></figure></div></section>
+<section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/lancement-recherche-maj.png" alt="Lancement de la recherche de mises à jour"></figure></section>
+<section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/bouton-mise-a-jour-facultatives.png" alt="Bouton des mises à jour facultatives"></figure></section>
+<section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/bouton-options-avancees.png" alt="Bouton Options avancées"></figure></section>
+<section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/lancement-maj-facultatives.png" alt="Lancement des mises à jour facultatives"></figure></section>
+<section class="bloc" data-bloc="cases"><ul class="cases">
+<li><label><input type="checkbox"> Mise à jour des applications :</label></li>
+</ul></section>
+<section class="bloc" data-bloc="texte"><p>Cette machine virtuelle est dotée d'une fonction de mise à jour automatique des applications initialement installées, ainsi que celles ajoutées via la procédure décrite dans la partie "Les logiciels".</p></section>
+<section class="bloc" data-bloc="texte"><p>Dans le dossier "ESP", présent sur le bureau, double-cliquez sur le fichier nommé "Mise à jour du système".</p>
+<p>Plusieurs phases de mises à jour vont ainsi être lancées. Veillez à accepter toutes les demandes qui vous sont faites.</p>
+<p>À partir d'une certaine étape, il vous sera demandé si vous souhaitez également mettre à jour la distribution Linux présente dans la machine virtuelle.</p>
+<p>Pour refuser, tapez n (non) et pour accepter, tapez o (oui).</p>
+<p>En cas d'acceptation, il vous sera demandé le mot de passe que vous avez paramétré lors de l'initialisation du système. Il s'agit du mot de passe Linux, pas celui de votre session utilisateur. Si vous utilisez la version préinstallée du projet, le mot de passe se trouve dans le tutoriel d'import du fichier ".ova".</p>
+<p>S'il est correctement entré, la mise à jour va se poursuivre et vous serez informé de la fin de ces opérations.</p></section>
+<section class="bloc" data-bloc="image"><figure class="petite"><img class="zoom" src="images/ighue8mlun.jpg" alt="Icône de mise à jour du système"></figure></section>
+<section class="bloc" data-bloc="cases"><ul class="cases">
+<li><label><input type="checkbox"> Vérifier son anonymisation :</label></li>
+</ul></section>
+<section class="bloc" data-bloc="texte"><p>Vérifiez que votre système d'anonymisation soit bien activé.</p>
+<p>Lancez ensuite le logiciel "My External IP" afin de vérifier que l'adresse IP qui s'y affiche est bien celle de votre système d'anonymisation.</p></section>
+</div></details>
+<details><summary>Premier paramétrage</summary><div class="details-corps">
+<section class="bloc" data-bloc="texte"><p>Cette partie ne concerne que les paramétrages à effectuer lors du premier montage de la machine virtuelle.<br>Elle ne sera plus à réaliser par la suite.</p></section>
+<section class="bloc" data-bloc="texte"><p>Une fois la machine virtuelle lancée, cliquez sur "Périphériques" puis cliquez sur "Insérer l'image CD des additions invités".</p></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/capture-peripherique-additions.png" alt="Menu Périphériques : insérer l'image CD des additions invités"></figure></section>
+<section class="bloc" data-bloc="texte"><p>Ceci simule l'ajout d'un lecteur CD virtuel, qu'il vous sera proposé d'ouvrir. Lancez alors le fichier exécutable correspondant à votre ordinateur (Généralement "VBoxWindowsAdditions-amd64").</p>
+<p>Cette étape nécessitera un redémarrage du système d'exploitation.</p></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/capture-execution-cd.png" alt="Exécution du fichier du CD des additions invités"></figure></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/capture-cd.png" alt="Lecteur CD des additions invités"></figure></section>
+<section class="bloc" data-bloc="html"><hr></section>
+<section class="bloc" data-bloc="texte"><p>Il sera ensuite nécessaire de retourner dans le menu "Périphériques" puis de cliquer sur "Upgrade Guest Addition...".</p></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/capture-peripherique-upgrade-additions.png" alt="Menu Périphériques : Upgrade Guest Addition"></figure></section>
+<section class="bloc" data-bloc="html"><hr></section>
+<section class="bloc" data-bloc="texte"><p>Les trois paramétrages suivants seront à définir par l'utilisateur, qui devra décider du niveau de sécurité qu'il estimera nécessaire à l'accomplissement de sa mission et à la sécurité de ses outils. Ils se situent également dans l'onglet "Périphériques".</p></section>
+<section class="bloc" data-bloc="html"><p class="attention">Les options suivantes seront à éviter dès lors que l'enquête portera sur des personnes disposant vraisemblablement de connaissances informatiques avancées, ou s'il est prévu de laisser un virus infecter volontairement la machine virtuelle afin de s'en servir d'élément de preuve.</p></section>
+<section class="bloc" data-bloc="titre"><h3>Dossier partagé</h3></section>
+<section class="bloc" data-bloc="texte"><p>Cette option permettra à l'utilisateur de disposer d'un dossier qui sera partagé entre sa machine hôte et la machine virtuelle, afin d'échanger des fichiers entre les deux.</p></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/7smklgutv8.jpg" alt="Option Dossier partagé"></figure></section>
+<section class="bloc" data-bloc="texte"><p>Pour mettre en place ce dossier partagé, cliquez sur "Périphériques &gt; Dossiers partagés &gt; Réglage des dossiers partagés...".</p>
+<p>Cliquez sur le logo de dossier bleu avec un "+" vert, sur la droite de la fenêtre :</p></section>
+<section class="bloc" data-bloc="image"><figure class="petite"><img class="zoom" src="images/cwa7mi6dj2.jpg" alt="Logo d'ajout de dossier partagé"></figure></section>
+<section class="bloc" data-bloc="texte"><p>Configurez la fenêtre "Ajouter un dossier partagé" comme suit :</p>
+<p><strong>Chemin du dossier</strong> : Dossier sur votre ordinateur "hôte", qui sera partagé avec votre machine virtuelle.</p>
+<p>Cochez les cases "Montage automatique" et "Configuration permanente".</p></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/p21l06lxxh.jpg" alt="Fenêtre Ajouter un dossier partagé"></figure></section>
+<section class="bloc" data-bloc="texte"><p>Le dossier partagé est ainsi accessible, sur la machine virtuelle, depuis l'onglet "Réseau" de l'explorateur de fichiers.</p></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/hl6tl8ak8a.jpg" alt="Dossier partagé dans l'onglet Réseau de l'explorateur de fichiers"></figure></section>
+<section class="bloc" data-bloc="titre"><h3>Presse-papiers partagé et glisser / déposer</h3></section>
+<section class="bloc" data-bloc="texte"><p>Cette option offre la possibilité d'effectuer des "copiés / collés" entre la machine "hôte" et la machine virtuelle.</p>
+<p><strong>Disabled</strong> : Fonction désactivée<br><strong>Hôte vers invité</strong> : Fonction ouverte de l'ordinateur hôte vers la machine virtuelle<br><strong>Invité vers hôte</strong> : Fonction ouverte de la machine virtuelle vers l'ordinateur "hôte"<br><strong>Bidirectionnel</strong> : Fonction possible dans les deux sens</p></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/ywkchgu8v4.jpg" alt="Options du presse-papier partagé"></figure></section>
+<section class="bloc" data-bloc="titre"><h3>Ajout du numéro de licence et création d'un point de sauvegarde (Instantané)</h3></section>
+<section class="bloc" data-bloc="texte"><p>À ce stade, vous utilisez une version d'essai du système d'exploitation de "Windows 11". Afin de la rendre valide dans le temps, vous devez ajouter un numéro de licence (devant être acheté préalablement). Cette partie est facultative et dépend de la volonté de l'utilisateur.</p>
+<p>Si vous souhaitez ajouter un numéro de licence, suivez ces étapes :</p></section>
+<section class="bloc" data-bloc="html"><div class="rangee-fleche"><figure class="moyenne"><img class="zoom" src="images/capture-activation.png" alt="Champ Activation"></figure><span class="fleche" aria-hidden="true">&rarr;</span><figure class="moyenne"><img class="zoom" src="images/76jrnecuum.jpg" alt="Bouton d'activation"></figure></div></section>
+<section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/1wqwlkiy3y.jpg" alt="Fenêtre d'activation de Windows"></figure></section>
+<section class="bloc" data-bloc="texte"><p>Dans la partie "Modifier la clé de produit (Product Key)", cliquez sur "Modifier" et ajoutez une clé produit correspondant à Windows 11 Professionnel.</p></section>
+<section class="bloc" data-bloc="texte"><p>À cette étape, l'ensemble des paramétrages initiaux sont terminés. Afin de nous permettre de revenir à ce stade de la machine virtuelle à chaque début d'une nouvelle enquête sous pseudonyme, il est nécessaire de définir un point de sauvegarde. Pour ce faire, nous allons utiliser la fonction "Instantané" du logiciel "Virtual Box".</p>
+<p>Il sera possible de revenir à ce point chaque fois que nécessaire, en supprimant toute trace d'utilisation ultérieure de la machine virtuelle.</p></section>
+<section class="bloc" data-bloc="texte"><p>Cliquez sur "Machine" puis "Prendre un instantané...".</p></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/ikmqtglu1p.jpg" alt="Menu Machine : Prendre un instantané"></figure></section>
+<section class="bloc" data-bloc="texte"><p>Modifiez le nom et la description de l'instantané, avec des termes permettant de l'identifier clairement.</p></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/93tk00q7x8.jpg" alt="Champs nom et description de l'instantané"></figure></section>
+<section class="bloc" data-bloc="texte"><p>Une fois votre enquête terminée, si vous souhaitez revenir à ce point de restauration, fermez la machine virtuelle et revenez sur le logiciel "VirtualBox" depuis votre machine "hôte".</p>
+<p>Au niveau de la ligne correspondant à votre machine virtuelle, cliquez sur le logo :</p></section>
+<section class="bloc" data-bloc="image"><figure class="petite"><img class="zoom" src="images/cjw8l2ljy9.jpg" alt="Logo des instantanés"></figure></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/oyp2ac1jh2.jpg" alt="Ligne de la machine virtuelle dans VirtualBox"></figure></section>
+<section class="bloc" data-bloc="texte"><p>Sélectionnez l'instantané souhaité et cliquez sur le bouton "Restaurer".</p></section>
+<section class="bloc" data-bloc="image"><figure class="petite"><img class="zoom" src="images/6pm5pl15nk.jpg" alt="Bouton Restaurer"></figure></section>
+<section class="bloc" data-bloc="texte"><p>Choisissez si vous souhaitez un nouvel instantané ou non, et cliquez sur "Restaurer".</p></section>
+<section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/vjwfpmbpmx.jpg" alt="Question : créer un nouvel instantané ou non"></figure></section>
+</div></details></section>
+</main>
+<footer id="pied"></footer>
+</body></html>

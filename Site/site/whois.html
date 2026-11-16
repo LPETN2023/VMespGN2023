@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Whois : Adresses IP et URL</title>
+<link rel="stylesheet" href="style.css">
+<script src="menu.js"></script><script src="site.js" defer></script>
+</head><body>
+<header id="entete"></header>
+<main id="contenu">
+  <section class="bloc" data-bloc="titre"><h1>Whois : Adresses IP et URL</h1></section>
+  <section class="bloc" data-bloc="texte">
+<p>La machine virtuelle dispose d'une distribution Linux intégrée, qui vous permet d'utiliser des outils de recherche en sources ouvertes ou d'aide aux investigations.</p>
+<p>Choisissez ci-dessous le type d'investigations que vous souhaitez mener et laissez-vous guider dans la création de la ligne de commande nécessaire.</p>
+<p>Cette ligne de commande devra simplement être copiée/collée dans le terminal WSL.</p>
+</section>
+  <section class="bloc" data-bloc="images"><figure class="petite"><img class="zoom" src="images/om63gure97.jpg" alt="Recherche WSL dans le menu Windows"></figure><figure class="petite"><img class="zoom" src="images/n4h34024fx.jpg" alt="Application WSL : Exécuter la commande"></figure></section>
+  <section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/0j0w5viaet.jpg" alt="Terminal WSL ouvert"></figure></section>
+  <section class="bloc" data-bloc="titre"><h2>Whois</h2></section>
+  <section class="bloc" data-bloc="texte">
+<p>"Whois" est un service qui permet d'interroger une base de données pour obtenir des informations sur la propriété d'un nom de domaine ou d'une adresse IP sur Internet. Ces informations incluent généralement des détails sur le propriétaire du domaine, l'adresse de contact, les serveurs de noms associés, et d'autres détails liés à l'enregistrement du domaine.</p>
+<p>Lorsque vous enregistrez un nom de domaine sur Internet, les informations que vous fournissez, telles que votre nom, votre adresse e-mail, votre numéro de téléphone, etc., sont généralement enregistrées dans une base de données Whois. Cela permet aux personnes de savoir qui est le propriétaire d'un domaine particulier et de contacter la personne en cas de besoin, par exemple, pour des questions administratives ou techniques.</p>
+<p>Munissez-vous de l'adresse IP sur laquelle portent vos investigations et renseignez-la dans le champ ci-dessous :</p>
+</section>
+  <section class="bloc" data-bloc="generateur">
+   <div class="generateur" data-modele="whois {ip}"
+        data-erreur="Veuillez entrer une adresse IP.">
+    <label>Entrez une adresse IP ou un nom de domaine : <input data-champ="ip" placeholder="IP ou nom de domaine"></label>
+    <button type="button">Générer</button>
+    <p class="aide">(Format : 000.000.000.000 - google.fr)</p>
+    <output></output> <span class="statut"></span>
+   </div>
+  </section>
+  <section class="bloc" data-bloc="texte">
+<p>L'analyse du résultat obtenu est accessible aux personnels formés "ICM".</p>
+<p>Pour rappel, voici une définition des principaux termes utiles :</p>
+<p><strong>Registrar</strong> : Vendeur des noms de domaines<br><strong>Registrant</strong> : Loueur, utilisateur final du nom de domaine</p>
+</section>
+</main>
+<footer id="pied"></footer>
+</body></html>

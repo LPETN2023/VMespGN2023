@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sherlock : Pseudonymes</title>
+<link rel="stylesheet" href="style.css">
+<script src="menu.js"></script><script src="site.js" defer></script>
+</head><body>
+<header id="entete"></header>
+<main id="contenu">
+  <section class="bloc" data-bloc="titre"><h1>Sherlock : Pseudonymes</h1></section>
+  <section class="bloc" data-bloc="texte">
+<p>La machine virtuelle dispose d'une distribution Linux intégrée, qui vous permet d'utiliser des outils de recherche en sources ouvertes ou d'aide aux investigations.</p>
+<p>Choisissez ci-dessous le type d'investigations que vous souhaitez mener et laissez-vous guider dans la création de la ligne de commande nécessaire.</p>
+<p>Cette ligne de commande devra simplement être copiée/collée dans le terminal WSL.</p>
+</section>
+  <section class="bloc" data-bloc="images"><figure class="petite"><img class="zoom" src="images/om63gure97.jpg" alt="Recherche WSL dans le menu Windows"></figure><figure class="petite"><img class="zoom" src="images/n4h34024fx.jpg" alt="Application WSL : Exécuter la commande"></figure></section>
+  <section class="bloc" data-bloc="image"><figure class="pleine"><img class="zoom" src="images/0j0w5viaet.jpg" alt="Terminal WSL ouvert"></figure></section>
+  <section class="bloc" data-bloc="titre"><h2>Sherlock</h2></section>
+  <section class="bloc" data-bloc="texte">
+<p>Sherlock permet d'interroger un grand nombre de sites internet afin de vérifier s'ils disposent d'un compte utilisateur associé à un pseudonyme.</p>
+<p>Entrez le pseudonyme dans le champ suivant :</p>
+</section>
+  <section class="bloc" data-bloc="generateur">
+   <div class="generateur" data-modele="sherlock {pseudo} &amp;&amp; rm {pseudo}.txt"
+        data-erreur="Veuillez entrer un pseudonyme.">
+    <label>Entrez un pseudonyme : <input data-champ="pseudo" placeholder="Entrez un pseudonyme"></label>
+    <button type="button">Générer</button>
+    <p class="aide">(Format : pseudonyme)</p>
+    <output></output> <span class="statut"></span>
+   </div>
+  </section>
+  <section class="bloc" data-bloc="texte">
+<p>Le résultat obtenu se présente sous cette forme :<br><em>(vous avez la possibilité de faire un Ctrl + clic gauche pour ouvrir les liens).</em></p>
+</section>
+  <section class="bloc" data-bloc="image"><figure class="moyenne"><img class="zoom" src="images/f53lgfae5g.jpg" alt="Exemple de résultat Sherlock"></figure></section>
+</main>
+<footer id="pied"></footer>
+</body></html>
