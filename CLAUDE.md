@@ -52,11 +52,27 @@ toutes les versions intermédiaires ; outils gratuits.
 `Documentation/` : `Tutoriel_utilisateur_ESP_v<version>.pdf`, `Guide_mainteneur_ESP_v<version>.pdf` et leurs
 sources `Documentation/sources/*.html` + `style.css` + `images/`. Génération :
 `google-chrome --headless=new --no-pdf-header-footer --print-to-pdf=<sortie.pdf> file://<source.html>`
-(police Carlito/Calibri, numéros de page par `@page`). `Site/` = « Système d'accompagnement utilisateur »
-(ancien site généré, pages par outil).
+(police Carlito/Calibri, numéros de page par `@page`). **Au 16/11/2026 le dossier `Documentation/` n'est pas
+dans le dépôt GitHub** (jamais poussé) : à demander au mainteneur avant de régénérer.
+`Site/site/` = « Système d'accompagnement utilisateur » (site refait le 16/11/2026, page d'accueil
+`Site/site/index.html`, raccourci du Bureau créé par `Set-ParametresWindows`). `Site/.gitignore` n'envoie que
+le sous-dossier `site`.
 
-## Points ouverts (au 12/11/2026)
+## Linux (WSL 1) : points à connaître
+- Ubuntu 24.04 en WSL 1 : `systemd-sysusers` échoue toujours (Launchpad #2080257, classé « Invalid »).
+  `esp_linux.sh` (`proteger_wsl1`) le détourne par `dpkg-divert` vers `/bin/true` puis lance
+  `dpkg --configure -a`. Détection WSL 1 : `uname -r` se termine par `-Microsoft`.
+- `installer_paquets_apt` : 3 essais de `apt-get update`, installation groupée puis paquet par paquet,
+  contrôle `dpkg-query` de chaque paquet (lignes `[OK] paquet` / `paquet X NON installé` dans le journal).
+- Impossible de tester WSL dans le bac à sable de Claude : demander le journal
+  `C:\ProgramData\ESP\journaux\` en cas de doute.
+
+## Points ouverts (au 16/11/2026)
+- 2.4.9 à valider sur VM : outils Linux (whois, whatweb, holehe, ignorant, sherlock, telepathy) sur une VM neuve
+  et après « Mise à jour » avec mise à jour d'Ubuntu = O ; raccourci du site sur le Bureau. La cause exacte du
+  signalement « les outils WSL ne s'installent pas » n'est pas confirmée (pas de journal reçu).
 - 2.4.7/2.4.8 à valider sur VM : disparition des raccourcis HTTrack et LibreOffice du Bureau, fenêtres
   « Plus rien à faire » et « Terminé ».
+- `9WZDNCRFJFCV` dans `logiciels_windows.txt` : logiciel du Store toujours non identifié.
 - Arrêt inexpliqué une fois pendant Notepad++ (10/11) ; relance réussie.
 - Discord se réinscrit au démarrage (retiré à chaque mise à jour, sans gravité).

@@ -1,5 +1,17 @@
 # Historique des versions
 
+## 2.4.9
+- Correction : le raccourci « Système d'accompagnement utilisateur » du Bureau ne s'ouvrait plus (ou n'était plus
+  créé) depuis la refonte du site, déplacé dans `Site/site/`. Il est recréé au bon endroit à la prochaine mise à jour.
+- Correction (Ubuntu 24.04 en WSL 1) : la mise à jour d'Ubuntu échouait sur le paquet `systemd`
+  (« Failed to take /etc/passwd lock: Invalid argument », défaut connu et non corrigé d'Ubuntu en WSL 1), puis
+  faisait échouer les installations suivantes. La commande fautive est neutralisée en WSL 1 et les installations
+  restées bloquées sont terminées automatiquement.
+- Outils Linux plus robustes : la liste des paquets est retentée 3 fois si le réseau n'est pas prêt ; un paquet
+  en erreur n'empêche plus l'installation des autres ; le journal indique paquet par paquet ce qui est installé
+  (`[OK] whois`) ou manquant (`paquet whois NON installé`).
+- Telepathy est installé dans le dossier du compte Linux par défaut de la VM.
+
 ## 2.4.8
 - Vérifications automatiques sur GitHub à chaque envoi (onglet « Actions ») : syntaxe et analyse des scripts
   PowerShell, BOM des `.ps1`, absence d'accents dans les `.bat`, fichiers de compatibilité présents,

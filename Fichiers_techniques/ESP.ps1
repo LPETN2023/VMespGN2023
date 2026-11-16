@@ -184,7 +184,9 @@ function Set-ParametresWindows {
 
     # Raccourcis sur le VRAI Bureau (gère le cas OneDrive)
     $bureau = [Environment]::GetFolderPath('Desktop')
+    # Le site est dans Site\site\ depuis sa refonte (ancien emplacement : Site\)
     $site = Join-Path $Racine 'Site\site\index.html'
+    if (-not (Test-Path $site)) { $site = Join-Path $Racine 'Site\index.html' }
     if (Test-Path $site) {
         New-Raccourci (Join-Path $bureau "Systeme d'accompagnement utilisateur.lnk") $site
     }

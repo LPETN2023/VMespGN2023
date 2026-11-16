@@ -26,8 +26,34 @@ lire_liste() {   # une valeur par ligne, '#' = commentaire
     sed -e 's/#.*//' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' "$ICI/$1" | grep -v '^$'
 }
 
-utilisateur_principal() {   # premier compte "humain" (UID 1000)
-    getent passwd 1000 | cut -d: -f1
+utilisateur_principal() {   # compte par défaut d'Ubuntu, sinon premier compte "humain" (UID 1000)
+    local u=""
+    [ -f /etc/wsl.conf ] && u="$(sed -n 's/^default=//p' /etc/wsl.conf | tail -n 1)"
+    if [ -n "$u" ] && [ "$u" != root ] && id -u "$u" >/dev/null 2>&1; then
+        echo "$u"
+    else
+        getent passwd 1000 | cut -d: -f1
+    fi
+}
+
+# -----------------------------------------------------------------------------
+proteger_wsl1() {
+    # Défaut connu d'Ubuntu 24.04 en WSL 1 : la commande "systemd-sysusers" échoue
+    # ("Failed to take /etc/passwd lock: Invalid argument"), ce qui bloque la mise à
+    # jour du paquet systemd, puis fait échouer toutes les installations suivantes.
+    # systemd ne fonctionne pas en WSL 1 : on neutralise cette seule commande.
+    # Le détournement (dpkg-divert) est conservé lors des mises à jour du paquet.
+    case "$(uname -r)" in *-Microsoft) ;; *) return 0 ;; esac    # WSL 1 uniquement
+    local f
+    f="$(dpkg -L systemd 2>/dev/null | grep -x -m 1 '/.*/systemd-sysusers')"
+    [ -n "$f" ] || return 0
+    if [ -z "$(dpkg-divert --list "$f")" ]; then
+        dpkg-divert --quiet --local --rename --divert "$f.distrib" --add "$f" \
+            || { echec "protection WSL 1 (dpkg-divert)"; return; }
+    fi
+    [ -e "$f" ] || ln -s /bin/true "$f" || { echec "protection WSL 1 (lien)"; return; }
+    # Termine les installations restées bloquées par ce défaut
+    dpkg --configure -a < /dev/null || echec "dpkg --configure -a"
 }
 
 # -----------------------------------------------------------------------------
@@ -56,9 +82,28 @@ creer_utilisateur() {
 # -----------------------------------------------------------------------------
 installer_paquets_apt() {
     echo "  Mise à jour de la liste des paquets..."
-    apt-get update -q || echec "apt-get update"
+    local essai paquet
+    for essai in 1 2 3; do      # le réseau n'est pas toujours prêt juste après un redémarrage
+        apt-get update -q && break
+        if [ "$essai" -eq 3 ]; then echec "apt-get update (liste des paquets non mise à jour)"
+        else echo "  Nouvel essai dans 15 secondes..."; sleep 15; fi
+    done
+    # Tous les paquets d'un coup ; en cas d'échec, un par un : un paquet en erreur
+    # n'empêche plus l'installation des autres.
     # shellcheck disable=SC2046
-    apt-get install -y -q $(lire_liste paquets_apt.txt) < /dev/null || echec "installation des paquets apt"
+    if ! apt-get install -y -q $(lire_liste paquets_apt.txt) < /dev/null; then
+        for paquet in $(lire_liste paquets_apt.txt); do
+            apt-get install -y -q "$paquet" < /dev/null || true
+        done
+    fi
+    # Contrôle : chaque paquet de la liste doit être réellement installé
+    for paquet in $(lire_liste paquets_apt.txt); do
+        if dpkg-query -W -f='${Status}' "$paquet" 2>/dev/null | grep -q 'ok installed'; then
+            echo "  [OK] $paquet"
+        else
+            echec "paquet $paquet NON installé"
+        fi
+    done
 }
 
 installer_outils_python() {
@@ -112,11 +157,13 @@ case "$ACTION" in
         creer_utilisateur "${2:?nom du compte manquant}"
         ;;
     outils)
+        proteger_wsl1
         installer_paquets_apt
         installer_outils_python
         installer_telepathy
         ;;
     maj)
+        proteger_wsl1
         installer_paquets_apt
         mettre_a_jour
         installer_outils_python
